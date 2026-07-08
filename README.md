@@ -9,6 +9,7 @@ Informe web estático para comité de dirección sobre el impacto de la intelige
 - `assets/fonts/`: fuentes `et-book` usadas por la web.
 - `assets/sg-ai-briefing-2026-2030.mp4`: briefing audiovisual embebido en la columna derecha.
 - `assets/sg-ai-briefing-poster.png`: imagen de portada del reproductor de vídeo.
+- `assets/societe-generale-ia-2026-2030-informe-comite.pdf`: informe imprimible para comité.
 - `.nojekyll`: evita que GitHub Pages procese el sitio con Jekyll.
 
 ## Cómo publicarlo en GitHub Pages

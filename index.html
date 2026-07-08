@@ -55,6 +55,8 @@ button { font: inherit; color: inherit; }
 .header-links { display: flex; flex-wrap: wrap; gap: 14px; justify-content: flex-end; font-family: var(--sans); font-size: 13px; line-height: 1.2; }
 .header-links a, .header-links button { border: 1.5px solid #000; background: transparent; padding: 5px 8px; text-decoration: none; border-radius: 0; cursor: pointer; }
 .header-links a:hover, .header-links button:hover { background: var(--accent); color: var(--paper); }
+.header-links .pdf-link { background: #000; color: var(--paper); font-weight: 800; }
+.header-links .pdf-link:hover { background: var(--accent); color: var(--paper); }
 .site-kicker { margin-top: 12px; font-family: var(--sans); font-size: 13px; line-height: 1.45; color: var(--muted); max-width: 680px; }
 .left-rail, .right-rail { align-self: start; position: sticky; top: 8px; max-height: calc(100vh - 12px); overflow-y: auto; padding-top: 14px; scrollbar-width: thin; }
 .left-rail { grid-column: 1; }
@@ -101,6 +103,11 @@ button { font: inherit; color: inherit; }
 .briefing-video { width: 100%; aspect-ratio: 1 / 1; border: 1.5px solid #000; background: #000; margin: 0 0 12px; display: grid; place-items: center; overflow: hidden; }
 .briefing-video video { width: 100%; height: 100%; display: block; object-fit: contain; background: #000; }
 .briefing-video video:focus-visible { outline: 2px solid var(--accent); outline-offset: -4px; }
+.download-panel { display: grid; grid-template-columns: 1fr; gap: 6px; margin: 0 0 14px; }
+.pdf-download-button { display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 1.5px solid #000; background: #000; color: var(--paper); padding: 10px 11px; font-family: var(--sans); font-size: 12px; line-height: 1.1; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; text-decoration: none; }
+.pdf-download-button::after { content: "PDF"; border: 1px solid rgba(255,255,248,.72); padding: 3px 5px; font-size: 10px; line-height: 1; letter-spacing: .08em; }
+.pdf-download-button:hover, .pdf-download-button:focus-visible { background: var(--accent); color: var(--paper); outline: none; }
+.download-note { font-family: var(--sans); font-size: 11px; line-height: 1.25; color: var(--muted); }
 .right-summary h2 { margin: 0 0 8px; font-size: 30px; line-height: .98; font-weight: 400; font-style: italic; }
 .right-summary p { margin: 0; font-family: var(--sans); font-size: 13px; line-height: 1.35; color: #333; }
 .red-list { display: grid; gap: 6px; margin-top: 10px; }
@@ -305,6 +312,7 @@ body.focus .content { padding-top: 24px; }
           <a href="#5-tres-escenarios-2026-2030">Escenarios</a>
           <a href="#7-decisiones-a-considerar">Decisiones</a>
           <a href="#8-cuadro-de-senales-tempranas">Señales</a>
+          <a class="pdf-link" href="assets/societe-generale-ia-2026-2030-informe-comite.pdf" download>Descargar PDF</a>
           <button type="button" id="focusMode">Modo lectura</button>
         </nav>
       </div>
@@ -606,6 +614,10 @@ body.focus .content { padding-top: 24px; }
             <source src="assets/sg-ai-briefing-2026-2030.mp4" type="video/mp4" />
             Tu navegador no puede reproducir este vídeo.
           </video>
+        </div>
+        <div class="download-panel" aria-label="Descarga del informe en PDF">
+          <a class="pdf-download-button" href="assets/societe-generale-ia-2026-2030-informe-comite.pdf" download>Descargar informe</a>
+          <div class="download-note">Versión imprimible para comité · 26 páginas</div>
         </div>
         <div class="panel-label">Panel de comité</div>
         <h2 id="rightTitle">Decidir primero</h2>
