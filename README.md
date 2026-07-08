@@ -7,6 +7,8 @@ Informe web estático para comité de dirección sobre el impacto de la intelige
 - `index.html`: presentación completa e interactiva.
 - `assets/societe-generale-logo.png`: logo usado en cabecera y favicon.
 - `assets/fonts/`: fuentes `et-book` usadas por la web.
+- `assets/sg-ai-briefing-2026-2030.mp4`: briefing audiovisual embebido en la columna derecha.
+- `assets/sg-ai-briefing-poster.png`: imagen de portada del reproductor de vídeo.
 - `.nojekyll`: evita que GitHub Pages procese el sitio con Jekyll.
 
 ## Cómo publicarlo en GitHub Pages
@@ -24,3 +26,7 @@ Informe web estático para comité de dirección sobre el impacto de la intelige
 ## Compatibilidad
 
 La web está preparada para ordenador, iPhone, móviles Android, iPad vertical e iPad horizontal. En pantallas pequeñas, las tablas se convierten en fichas legibles para evitar desplazamiento horizontal.
+
+URL pública:
+
+`https://nestorguerra.github.io/SGE_2026-2030/`

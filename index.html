@@ -98,6 +98,9 @@ button { font: inherit; color: inherit; }
 .year-controls button { border: 1.5px solid #000; background: transparent; border-radius: 0; padding: 5px 0; font-family: var(--sans); font-size: 11px; font-weight: 700; cursor: pointer; }
 .year-controls button.active { background: var(--accent); color: var(--paper); }
 .right-summary { border: 1.5px solid #000; padding: 12px; background: var(--paper); margin-bottom: 12px; }
+.briefing-video { width: 100%; aspect-ratio: 1 / 1; border: 1.5px solid #000; background: #000; margin: 0 0 12px; display: grid; place-items: center; overflow: hidden; }
+.briefing-video video { width: 100%; height: 100%; display: block; object-fit: contain; background: #000; }
+.briefing-video video:focus-visible { outline: 2px solid var(--accent); outline-offset: -4px; }
 .right-summary h2 { margin: 0 0 8px; font-size: 30px; line-height: .98; font-weight: 400; font-style: italic; }
 .right-summary p { margin: 0; font-family: var(--sans); font-size: 13px; line-height: 1.35; color: #333; }
 .red-list { display: grid; gap: 6px; margin-top: 10px; }
@@ -237,11 +240,13 @@ body.focus .content { padding-top: 24px; }
   .main-grid { display: flex; flex-direction: column; padding: 8px 14px 54px; }
   .site-header, .content, .footer { grid-column: auto; }
   .site-header { order: 1; }
-  .content { order: 2; }
-  .right-rail { order: 3; }
+  .right-rail { order: 2; }
+  .content { order: 3; }
   .left-rail { order: 4; }
   .footer { order: 5; }
   .left-rail, .right-rail { position: static; max-height: none; overflow: visible; padding-top: 12px; }
+  .right-rail, .left-rail { width: 100%; max-width: 780px; align-self: center; }
+  .briefing-video { max-width: 520px; margin-left: auto; margin-right: auto; }
   .section-nav { display: grid; grid-template-columns: repeat(2, 1fr); border-right: 0; border: 1.5px solid #000; padding: 8px; gap: 6px; }
   .section-nav a { font-size: 15px; text-align: left; border: 1px solid #000; padding: 5px 6px; }
   .section-nav a::after { display: none; }
@@ -596,6 +601,12 @@ body.focus .content { padding-top: 24px; }
 
     <aside class="right-rail" aria-label="Columna derecha dinámica">
       <div class="right-summary">
+        <div class="briefing-video" aria-label="Vídeo briefing IA 2026-2030">
+          <video controls preload="metadata" playsinline poster="assets/sg-ai-briefing-poster.png">
+            <source src="assets/sg-ai-briefing-2026-2030.mp4" type="video/mp4" />
+            Tu navegador no puede reproducir este vídeo.
+          </video>
+        </div>
         <div class="panel-label">Panel de comité</div>
         <h2 id="rightTitle">Decidir primero</h2>
         <p id="rightText">Decisiones, red flags e indicadores cambian con el scroll.</p>
