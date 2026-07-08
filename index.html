@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Société Générale España · IA 2026-2030</title>
+  <meta name="description" content="Informe web completo para comité sobre el impacto de la inteligencia artificial en Société Générale España entre 2026 y 2030." />
+  <link rel="icon" href="assets/societe-generale-logo.png" />
+  <style>
+@font-face { font-family: et-book; src: url("assets/fonts/et-book-roman-line-figures.woff") format("woff"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: et-book; src: url("assets/fonts/et-book-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: et-book; src: url("assets/fonts/et-book-bold-line-figures.woff") format("woff"); font-weight: 700; font-style: normal; font-display: swap; }
+:root {
+  --paper: #fffff8;
+  --ink: #111111;
+  --muted: #666666;
+  --line: #111111;
+  --hairline: #d2cbbd;
+  --soft: #f0eee3;
+  --accent: #2a623d;
+  --race: #8b0000;
+  --sg: #e60028;
+  --amber: #9f6515;
+  --blue: #365a7a;
+  --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: SFMono-Regular, Menlo, Consolas, Monaco, Liberation Mono, monospace;
+}
+* { box-sizing: border-box; }
+html { font-size: 15px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: et-book, Palatino, "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  counter-reset: section;
+  -webkit-font-smoothing: subpixel-antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection { background: var(--accent); color: var(--paper); }
+a { color: inherit; text-decoration-thickness: 1.5px; text-underline-offset: 2px; }
+button { font: inherit; color: inherit; }
+.progress-rail { position: fixed; top: 10px; right: 7px; width: 1.5px; height: calc(100vh - 20px); background: transparent; z-index: 50; }
+.progress-rail span { display: block; width: 100%; height: 0; background: #000; transition: height .12s linear; }
+.main-grid {
+  display: grid;
+  grid-template-columns: minmax(190px, 1fr) minmax(330px, 700px) minmax(300px, 430px);
+  column-gap: clamp(26px, 4vw, 54px);
+  max-width: 1510px;
+  margin: 0 auto;
+  padding: 8px 18px 72px;
+}
+.site-header { grid-column: 2 / 4; padding: 26px 0 28px; border-bottom: 1.5px solid var(--line); }
+.header-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 28px; }
+.logo { display: block; width: min(345px, 46vw); max-height: 72px; object-fit: contain; object-position: left center; }
+.header-links { display: flex; flex-wrap: wrap; gap: 14px; justify-content: flex-end; font-family: var(--sans); font-size: 13px; line-height: 1.2; }
+.header-links a, .header-links button { border: 1.5px solid #000; background: transparent; padding: 5px 8px; text-decoration: none; border-radius: 0; cursor: pointer; }
+.header-links a:hover, .header-links button:hover { background: var(--accent); color: var(--paper); }
+.site-kicker { margin-top: 12px; font-family: var(--sans); font-size: 13px; line-height: 1.45; color: var(--muted); max-width: 680px; }
+.left-rail, .right-rail { align-self: start; position: sticky; top: 8px; max-height: calc(100vh - 12px); overflow-y: auto; padding-top: 14px; scrollbar-width: thin; }
+.left-rail { grid-column: 1; }
+.left-rail { display: flex; flex-direction: column; }
+.left-rail .panel-box { order: 1; }
+.left-rail .toc-title { order: 2; margin-top: 6px; }
+.left-rail .section-nav { order: 3; margin-bottom: 0; }
+.left-rail .panel-box { padding: 8px; margin-bottom: 8px; }
+.left-rail .panel-box h2 { font-size: 21px; }
+.left-rail .rail-stack { gap: 5px; }
+.left-rail .rail-card { padding: 5px 6px 6px; }
+.left-rail .rail-card-head { padding-bottom: 3px; margin-bottom: 4px; }
+.left-rail .rail-card-head span { font-size: 10px; }
+.left-rail .rail-card p { font-size: 10.7px; line-height: 1.2; }
+.left-rail .rail-card em { margin-top: 3px; font-size: 10.2px; line-height: 1.18; }
+.right-rail { grid-column: 3; }
+.content { grid-column: 2; min-width: 0; padding-top: 32px; }
+.toc-title, .panel-label { font-family: var(--sans); font-size: 11px; line-height: 1.2; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; color: var(--muted); margin-bottom: 10px; }
+.section-nav { display: flex; flex-direction: column; gap: 0; padding-right: 14px; border-right: 1.5px solid #000; margin-bottom: 18px; }
+.section-nav a { display: block; text-align: right; text-decoration: none; font-family: et-book, Georgia, serif; font-size: 18px; line-height: 1.05; padding: 9px 0; color: rgba(17,17,17,.48); }
+.section-nav a.active { color: var(--race); font-weight: 700; font-style: italic; transform: translateX(-3px); }
+.panel-box { border: 1.5px solid #000; background: rgba(255,255,248,.88); padding: 10px; margin-bottom: 12px; border-radius: 0; }
+.panel-box h2, .panel-box h3 { margin: 0 0 8px; font-size: 23px; line-height: 1; font-weight: 400; font-style: italic; }
+.panel-note { margin: 8px 0 0; font-size: 14px; line-height: 1.25; font-family: var(--sans); color: #333; }
+.rail-stack { display: grid; gap: 7px; }
+.rail-card { border: 1.5px solid #000; background: var(--paper); padding: 7px 8px 8px; font-family: var(--sans); line-height: 1.22; }
+.rail-card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; border-bottom: 1px solid #000; padding-bottom: 4px; margin-bottom: 5px; }
+.rail-card-head span { font-size: 11px; line-height: 1; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; }
+.rail-card-head b { font-size: 10px; line-height: 1; color: var(--muted); white-space: nowrap; }
+.rail-card p { margin: 0; font-size: 11.5px; line-height: 1.28; }
+.rail-card em { display: block; margin-top: 5px; color: var(--accent); font-size: 11px; line-height: 1.25; font-style: italic; }
+.rail-card.scenario-card { border-left: 5px solid #000; }
+.rail-card.scenario-card:nth-child(2) { border-left-color: var(--accent); }
+.rail-card.scenario-card:nth-child(3) { border-left-color: var(--race); }
+.rail-card.context-card { background: #f7f3e9; }
+.rail-card.action-card { display: grid; grid-template-columns: 104px 1fr; gap: 8px; align-items: start; }
+.rail-card.action-card .rail-code { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; overflow-wrap: anywhere; }
+.rail-card.action-card p { font-size: 11.2px; }
+.rail-card.action-card em { margin-top: 3px; }
+.year-controls { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; margin: 10px 0 14px; }
+.year-controls button { border: 1.5px solid #000; background: transparent; border-radius: 0; padding: 5px 0; font-family: var(--sans); font-size: 11px; font-weight: 700; cursor: pointer; }
+.year-controls button.active { background: var(--accent); color: var(--paper); }
+.right-summary { border: 1.5px solid #000; padding: 12px; background: var(--paper); margin-bottom: 12px; }
+.right-summary h2 { margin: 0 0 8px; font-size: 30px; line-height: .98; font-weight: 400; font-style: italic; }
+.right-summary p { margin: 0; font-family: var(--sans); font-size: 13px; line-height: 1.35; color: #333; }
+.red-list { display: grid; gap: 6px; margin-top: 10px; }
+.red-list div { border-left: 5px solid var(--race); padding: 5px 7px; font-family: var(--sans); font-size: 12px; line-height: 1.25; background: #f4eee8; }
+.hero { min-height: 66vh; padding: 16px 0 58px; border-bottom: 1.5px solid var(--line); scroll-margin-top: 22px; }
+h1 { font-size: clamp(54px, 7.2vw, 82px); line-height: .91; font-weight: 400; letter-spacing: 0; margin: 20px 0 20px; }
+.subtitle { font-size: clamp(26px, 3.2vw, 42px); line-height: 1.02; font-style: italic; margin: 0 0 20px; }
+.hero-lede { font-size: 1.62rem; line-height: 2.18rem; margin: 1.4rem 0; text-wrap: pretty; }
+.intro-note { border: 1.5px solid #000; padding: 10px 12px; margin: 10px 0; font-size: 1.18rem; line-height: 1.45; background: rgba(240,238,227,.42); }
+.intro-note strong { font-style: italic; }
+.hero-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 24px; }
+.metric { border: 1.5px solid #000; padding: 10px; min-height: 90px; background: var(--paper); }
+.metric b { display: block; font-family: var(--sans); font-size: 12px; line-height: 1; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; color: var(--muted); }
+.metric span { display: block; font-size: 34px; line-height: .9; font-style: italic; }
+.chapter { padding: 62px 0 70px; border-bottom: 1.5px solid var(--line); scroll-margin-top: 24px; }
+.chapter h2 { font-size: 2.2rem; line-height: 1; font-weight: 400; margin: 0 0 2rem; }
+.chapter h3 { font-size: 1.7rem; line-height: 1; font-weight: 400; font-style: italic; margin: 2.4rem 0 1.2rem; }
+.chapter h4 { font-size: 1.45rem; line-height: 1; font-weight: 400; font-style: italic; margin: 1.8rem 0 1rem; }
+.chapter p, .chapter ol, .chapter ul { font-size: 1.4rem; line-height: 2rem; margin: 1.35rem 0; text-wrap: pretty; }
+.chapter > p:first-of-type { font-size: 1.52rem; line-height: 2.12rem; font-style: italic; }
+.chapter strong { font-weight: 700; }
+.chapter em { font-style: italic; }
+.chapter ul, .chapter ol { padding-left: 1.55rem; }
+.chapter li { margin: .45rem 0; }
+.chapter hr { border: 0; border-top: 1px solid #ccc; margin: 2.4rem 0; }
+.table-frame { width: min(100%, calc(100vw - 42px)); overflow-x: auto; margin: 1.8rem 0 2.1rem; border: 1.5px solid #000; background: var(--paper); }
+.table-frame table { min-width: 0; width: 100%; border-collapse: collapse; table-layout: fixed; font-family: var(--sans); font-size: 11.6px; line-height: 1.28; }
+.table-frame th, .table-frame td { border: 1px solid #000; padding: 8px 9px; vertical-align: top; }
+.table-frame th, .table-frame td { overflow-wrap: anywhere; hyphens: auto; }
+.table-frame th { background: #000; color: var(--paper); text-align: left; font-weight: 700; }
+.table-frame tbody tr:nth-child(even) td { background: #f6f3e8; }
+.table-frame strong { font-weight: 800; }
+.signature { font-style: italic; color: #333; }
+.source-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 24px 0 6px; }
+.source-strip .panel-box { margin: 0; min-height: 120px; }
+.source-strip b { font-family: var(--sans); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); display: block; margin-bottom: 8px; }
+.source-strip p { margin: 0; font-size: 1.15rem; line-height: 1.35; }
+.thesis-square { width: min(100%, 540px); aspect-ratio: 1 / 1; margin: 2rem auto 2.2rem; border: 1.5px solid #000; background: #000; color: var(--paper); padding: clamp(18px, 3vw, 32px); display: flex; flex-direction: column; justify-content: space-between; }
+.thesis-square .eyebrow { display: block; font-family: var(--sans); font-size: 11px; line-height: 1; text-transform: uppercase; letter-spacing: .1em; font-weight: 800; color: rgba(255,255,248,.72); }
+.thesis-square strong { display: block; font-size: clamp(39px, 6vw, 64px); line-height: .89; font-weight: 400; font-style: italic; letter-spacing: 0; }
+.thesis-square p { margin: 16px 0 0; max-width: 430px; font-family: var(--sans); font-size: 14px; line-height: 1.35; color: rgba(255,255,248,.82); }
+.thesis-square .thesis-foot { display: flex; justify-content: space-between; gap: 18px; border-top: 1px solid rgba(255,255,248,.5); padding-top: 12px; font-family: var(--sans); font-size: 11px; line-height: 1.2; text-transform: uppercase; letter-spacing: .07em; color: rgba(255,255,248,.7); }
+.visual-board, .spotlight-grid, .scenario-board, .decision-map, .signal-board, .evidence-board { margin: 1.8rem 0 2rem; }
+.visual-board { display: grid; grid-template-columns: 1.05fr .95fr; gap: 10px; }
+.visual-card, .quote-card, .scenario-tile, .decision-lane, .signal-tile, .evidence-card { border: 1.5px solid #000; background: var(--paper); padding: 13px; border-radius: 0; }
+.visual-card.dark { background: #000; color: var(--paper); }
+.visual-card.accent { background: var(--accent); color: var(--paper); }
+.visual-card.race { background: var(--race); color: var(--paper); }
+.visual-card .eyebrow, .quote-card .eyebrow, .scenario-tile .eyebrow, .decision-lane .eyebrow, .signal-tile .eyebrow, .evidence-card .eyebrow {
+  display: block; font-family: var(--sans); font-size: 11px; line-height: 1; text-transform: uppercase; letter-spacing: .08em; font-weight: 800; color: var(--muted); margin-bottom: 8px;
+}
+.visual-card.dark .eyebrow, .visual-card.accent .eyebrow, .visual-card.race .eyebrow { color: rgba(255,255,248,.72); }
+.visual-card strong, .quote-card strong { display: block; font-size: 2rem; line-height: .95; font-weight: 400; font-style: italic; margin-bottom: 8px; }
+.visual-card p, .quote-card p, .scenario-tile p, .decision-lane p, .signal-tile p, .evidence-card p { margin: 0; font-family: var(--sans); font-size: 13px; line-height: 1.35; }
+.visual-mini-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.visual-mini { border: 1.5px solid #000; padding: 10px; background: #f7f3e9; min-height: 105px; }
+.visual-mini b { display: block; font-family: var(--sans); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
+.visual-mini span { display: block; font-size: 1.5rem; line-height: 1; font-style: italic; }
+.spotlight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+.quote-card { min-height: 184px; display: flex; flex-direction: column; justify-content: space-between; }
+.quote-card:nth-child(1) { border-top: 8px solid var(--accent); }
+.quote-card:nth-child(2) { border-top: 8px solid var(--race); }
+.quote-card:nth-child(3) { border-top: 8px solid #000; }
+.flow-diagram { border: 1.5px solid #000; padding: 12px; margin: 1.8rem 0 2rem; background: #f7f3e9; }
+.flow-title { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 12px; border-bottom: 1.5px solid #000; padding-bottom: 8px; }
+.flow-title b { font-family: var(--sans); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+.flow-title em { font-size: 1.2rem; line-height: 1; }
+.flow-row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; align-items: stretch; }
+.flow-node { position: relative; border: 1.5px solid #000; background: var(--paper); padding: 9px 7px; min-height: 92px; }
+.flow-node:not(:last-child)::after { content: ""; position: absolute; top: 50%; right: -7px; width: 7px; border-top: 1.5px solid #000; }
+.flow-node b { display: block; font-family: var(--sans); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 7px; }
+.flow-node span { display: block; font-size: 1.05rem; line-height: 1.02; font-style: italic; }
+.flow-node.final { background: var(--accent); color: var(--paper); }
+.scenario-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+.scenario-tile { min-height: 205px; position: relative; overflow: hidden; }
+.scenario-tile::before { content: ""; position: absolute; inset: auto 0 0 0; height: 8px; background: #000; }
+.scenario-tile.central::before { background: var(--accent); }
+.scenario-tile.tail::before { background: var(--race); }
+.scenario-tile h4 { margin: 0 0 10px; font-size: 1.55rem; line-height: 1; font-style: italic; font-weight: 400; }
+.scenario-years { display: flex; gap: 4px; margin-top: 13px; }
+.scenario-years span { flex: 1; border: 1px solid #000; font-family: var(--sans); font-size: 10px; text-align: center; padding: 3px 0; background: #f7f3e9; }
+.scenario-lab { margin: 1.8rem 0 2.4rem; padding: 18px 0 0; border-top: 1.5px solid #000; border-bottom: 1.5px solid #000; }
+.scenario-lab-header { display: grid; grid-template-columns: 1fr; gap: 10px; align-items: end; margin-bottom: 13px; }
+.scenario-lab-header h3 { margin: 0; font-size: 1.9rem; line-height: .98; }
+.scenario-lab-header p { margin: 0; max-width: 620px; font-family: var(--sans); font-size: 13px; line-height: 1.35; }
+.scenario-selector { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
+.scenario-btn { min-height: 136px; border: 1.5px solid #000; border-radius: 0; background: var(--paper); padding: 10px; text-align: left; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; transition: background .12s ease, color .12s ease, transform .12s ease; }
+.scenario-btn:hover { transform: translateY(-2px); }
+.scenario-btn.active { background: #000; color: var(--paper); }
+.scenario-btn .weight { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; font-family: var(--sans); font-size: 11px; line-height: 1; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.scenario-btn.active .weight { color: rgba(255,255,248,.72); }
+.scenario-btn .name { display: block; margin-top: 14px; font-size: 1.45rem; line-height: .96; font-style: italic; }
+.scenario-btn .hint { display: block; margin-top: 8px; font-family: var(--sans); font-size: 12px; line-height: 1.3; }
+.scenario-summary { border: 1.5px solid #000; background: rgba(42,98,61,.035); padding: 14px; margin-bottom: 12px; }
+.scenario-summary-grid { display: grid; grid-template-columns: 110px 1fr; gap: 16px; align-items: start; }
+.scenario-score { border-right: 1.5px solid #000; padding-right: 12px; min-height: 220px; display: flex; flex-direction: column; justify-content: space-between; }
+.scenario-score b { display: block; font-size: 52px; line-height: .9; font-weight: 400; font-style: italic; }
+.scenario-score span { display: block; margin-top: 8px; font-family: var(--sans); font-size: 11px; line-height: 1.25; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.scenario-copy h4 { margin: 0 0 10px; font-size: 2rem; line-height: .96; font-style: italic; font-weight: 400; }
+.scenario-copy p { margin: 0 0 12px; font-family: var(--sans); font-size: 14px; line-height: 1.42; }
+.scenario-detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+.scenario-detail { border: 1px solid #000; padding: 9px; background: var(--paper); }
+.scenario-detail b { display: block; font-family: var(--sans); font-size: 10px; line-height: 1; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 7px; color: var(--muted); }
+.scenario-detail span { display: block; font-family: var(--sans); font-size: 12px; line-height: 1.28; }
+.scenario-timeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 10px 0 12px; }
+.scenario-year { border: 1px solid #000; padding: 8px; min-height: 116px; background: #f7f3e9; }
+.scenario-year b { display: block; font-family: var(--sans); font-size: 11px; line-height: 1; margin-bottom: 8px; }
+.scenario-year span { display: block; font-family: var(--sans); font-size: 11.5px; line-height: 1.28; }
+.scenario-dock { display: flex; justify-content: space-between; gap: 16px; border-top: 1.5px solid #000; background: rgba(255,255,248,.96); padding: 9px 0; font-family: var(--sans); font-size: 12px; line-height: 1.25; }
+.scenario-dock b { text-transform: uppercase; letter-spacing: .08em; }
+.decision-map { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.decision-lane { min-height: 190px; }
+.decision-lane h4 { margin: 0 0 8px; font-size: 1.45rem; line-height: 1; font-weight: 400; font-style: italic; }
+.decision-lane ul { margin: 12px 0 0; padding-left: 1rem; font-family: var(--sans); font-size: 12px; line-height: 1.3; }
+.decision-lane li { margin: 3px 0; }
+.signal-board { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.signal-tile { min-height: 122px; padding: 10px; }
+.signal-tile strong { display: block; font-size: 1.3rem; line-height: .95; font-style: italic; font-weight: 400; margin-bottom: 8px; }
+.evidence-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.evidence-card { min-height: 150px; }
+.evidence-card strong { display: block; font-size: 1.45rem; line-height: .98; font-style: italic; font-weight: 400; margin-bottom: 8px; }
+.impact-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 1.4rem 0 1.8rem; }
+.impact-strip div { border: 1.5px solid #000; padding: 10px; font-family: var(--sans); font-size: 12px; line-height: 1.3; background: #f7f3e9; }
+.impact-strip b { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 6px; }
+.footer { grid-column: 2 / 4; border-top: 1.5px solid #000; margin-top: 32px; padding-top: 16px; font-family: var(--sans); font-size: 12px; line-height: 1.35; color: var(--muted); }
+body.focus .left-rail, body.focus .right-rail, body.focus .site-header { display: none; }
+body.focus .main-grid { display: block; max-width: 760px; }
+body.focus .content { padding-top: 24px; }
+@media (max-width: 1180px) {
+  .main-grid { grid-template-columns: 34px minmax(0, 720px) minmax(260px, 360px); column-gap: 24px; }
+  .section-nav a { font-size: 0; padding: 8px 0; }
+  .section-nav a::after { content: ''; display: inline-block; width: 10px; height: 10px; border: 1.5px solid #000; background: var(--paper); }
+  .section-nav a.active::after { background: var(--race); }
+  .left-rail .panel-box { display: none; }
+}
+@media (max-width: 1100px) {
+  .main-grid { display: flex; flex-direction: column; padding: 8px 14px 54px; }
+  .site-header, .content, .footer { grid-column: auto; }
+  .site-header { order: 1; }
+  .content { order: 2; }
+  .right-rail { order: 3; }
+  .left-rail { order: 4; }
+  .footer { order: 5; }
+  .left-rail, .right-rail { position: static; max-height: none; overflow: visible; padding-top: 12px; }
+  .section-nav { display: grid; grid-template-columns: repeat(2, 1fr); border-right: 0; border: 1.5px solid #000; padding: 8px; gap: 6px; }
+  .section-nav a { font-size: 15px; text-align: left; border: 1px solid #000; padding: 5px 6px; }
+  .section-nav a::after { display: none; }
+  .left-rail .panel-box { display: block; }
+  .header-top { flex-direction: column; }
+  .header-links { justify-content: flex-start; }
+  .header-links a, .header-links button { min-height: 38px; display: inline-flex; align-items: center; padding: 8px 10px; }
+  .year-controls button { min-height: 38px; padding: 8px 0; font-size: 12px; }
+  .hero-metrics, .source-strip, .spotlight-grid, .scenario-board, .scenario-selector, .scenario-timeline, .scenario-detail-grid, .decision-map, .signal-board, .evidence-board, .impact-strip { grid-template-columns: 1fr 1fr; }
+  .scenario-lab-header, .scenario-summary-grid { grid-template-columns: 1fr; }
+  .scenario-score { border-right: 0; border-bottom: 1.5px solid #000; padding: 0 0 12px; min-height: auto; }
+  .visual-board { grid-template-columns: 1fr; }
+  .flow-row { grid-template-columns: 1fr; }
+  .flow-node:not(:last-child)::after { top: auto; bottom: -7px; right: 50%; width: 0; height: 7px; border-top: 0; border-left: 1.5px solid #000; }
+  .chapter { padding: 44px 0; }
+  h1 { font-size: 54px; }
+}
+@media (max-width: 820px) {
+  .table-frame { width: 100%; overflow: visible; }
+  .table-frame table { min-width: 0; width: 100%; table-layout: auto; border-collapse: collapse; font-size: 12px; line-height: 1.32; }
+  .table-frame thead { display: none; }
+  .table-frame tbody, .table-frame tr, .table-frame td { display: block; width: 100%; }
+  .table-frame tr { border-top: 1.5px solid #000; }
+  .table-frame tr:first-child { border-top: 0; }
+  .table-frame td { border: 0; border-top: 1px solid #000; padding: 9px 10px 10px; }
+  .table-frame td:first-child { border-top: 0; }
+  .table-frame td::before { content: attr(data-label); display: block; margin-bottom: 5px; font-family: var(--sans); font-size: 10px; line-height: 1; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+}
+@media (max-width: 620px) {
+  html { font-size: 14px; }
+  .hero-metrics, .source-strip, .section-nav, .visual-mini-grid, .spotlight-grid, .scenario-board, .scenario-selector, .scenario-timeline, .scenario-detail-grid, .decision-map, .signal-board, .evidence-board, .impact-strip { grid-template-columns: 1fr; }
+  .thesis-square { width: 100%; aspect-ratio: auto; min-height: 420px; }
+  .logo { width: 100%; }
+  .header-links a, .header-links button { min-height: 40px; display: inline-flex; align-items: center; padding: 8px 10px; }
+  .year-controls button { min-height: 40px; padding: 8px 0; font-size: 12px; }
+  .chapter p, .chapter ol, .chapter ul { font-size: 1.25rem; line-height: 1.5; }
+  .chapter > p:first-of-type { font-size: 1.32rem; line-height: 1.5; }
+}
+@media print {
+  .left-rail, .right-rail, .header-links, .progress-rail { display: none !important; }
+  .main-grid { display: block; max-width: 760px; }
+  body { background: white; }
+  .chapter { break-inside: auto; }
+  .table-frame { overflow: visible; }
+}
+</style>
+</head>
+<body>
+  <div class="progress-rail" aria-hidden="true"><span id="progressBar"></span></div>
+  <div class="main-grid">
+    <header class="site-header">
+      <div class="header-top">
+        <img class="logo" src="assets/societe-generale-logo.png" alt="Société Générale" />
+        <nav class="header-links" aria-label="Acciones del informe">
+          <a href="#1-resumen-ejecutivo">Resumen</a>
+          <a href="#5-tres-escenarios-2026-2030">Escenarios</a>
+          <a href="#7-decisiones-a-considerar">Decisiones</a>
+          <a href="#8-cuadro-de-senales-tempranas">Señales</a>
+          <button type="button" id="focusMode">Modo lectura</button>
+        </nav>
+      </div>
+      <div class="site-kicker">Formato editorial inspirado en ai-2027.com: fuente et-book, fondo papel, lectura central estrecha y columnas dinámicas para escenarios, años, decisiones, red flags e indicadores.</div>
+    </header>
+
+    <aside class="left-rail" aria-label="Columna izquierda dinámica">
+      <div class="toc-title">Índice</div>
+      <nav class="section-nav"><a href="#1-resumen-ejecutivo" data-nav-state="resumen"><span>Resumen ejecutivo</span></a>
+<a href="#2-punto-de-partida" data-nav-state="partida"><span>Punto de partida</span></a>
+<a href="#3-la-tecnologia-que-esperar-de-aqui-a-2030" data-nav-state="tecnologia"><span>La tecnología: qué esperar de aquí a 2030</span></a>
+<a href="#4-doce-previsiones-clave" data-nav-state="forecasts"><span>Doce previsiones clave</span></a>
+<a href="#5-tres-escenarios-2026-2030" data-nav-state="escenarios"><span>Tres escenarios 2026-2030</span></a>
+<a href="#6-prueba-de-resistencia-que-aguanta-y-que-no" data-nav-state="resistencia"><span>Prueba de resistencia: qué aguanta y qué no</span></a>
+<a href="#7-decisiones-a-considerar" data-nav-state="decisiones"><span>Decisiones a considerar</span></a>
+<a href="#8-cuadro-de-senales-tempranas" data-nav-state="senales"><span>Cuadro de señales tempranas</span></a>
+<a href="#9-preguntas-para-el-comite" data-nav-state="preguntas"><span>Preguntas para el comité</span></a>
+<a href="#10-los-proximos-90-dias" data-nav-state="noventa"><span>Los próximos 90 días</span></a>
+<a href="#11-que-sabemos-que-interpretamos-que-suponemos-y-que-falta" data-nav-state="limites"><span>Qué sabemos, qué interpretamos, qué suponemos y qué falta</span></a></nav>
+      <div class="panel-box">
+        <div class="panel-label" id="leftLabel">Resumen ejecutivo · 2026</div>
+        <h2 id="leftTitle">Las tres tesis</h2>
+        <div id="leftScenario"></div>
+      </div>
+      <div class="panel-box">
+        <div class="panel-label">Lectura de la sección</div>
+        <div id="leftContext"></div>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section class="hero" id="inicio" data-state="resumen" data-year="2026">
+        <div class="toc-title">Société Générale España · IA 2026-2030 · Julio 2026</div>
+        <h1>El impacto de la inteligencia artificial en Société Générale España, 2026-2030</h1>
+        <p class="subtitle">Informe para el Comité de Dirección</p>
+        <p class="hero-lede">El documento no intenta vender una predicción única: convierte el informe completo en una experiencia de comité, con escenarios, decisiones, umbrales, señales y límites visibles mientras se lee.</p>
+        <div class="thesis-square" aria-label="Tesis central del informe">
+          <span class="eyebrow">Tesis del comité</span>
+          <div>
+            <strong>No gana quien use más IA. Gana quien capture mejor el valor.</strong>
+            <p>El comité debe separar capacidad técnica, permiso bancario, integración real y margen local. Sin esa cadena, el ahorro es solo una promesa bonita.</p>
+          </div>
+          <div class="thesis-foot"><span>2026-2030</span><span>Medir · defender · capturar</span></div>
+        </div>
+        <p class="intro-note"><strong>Objeto.</strong> Anticipar y priorizar los impactos plausibles de la inteligencia artificial sobre el negocio de Société Générale España en los próximos cinco años, y traducirlos en decisiones concretas, señales a vigilar y validaciones pendientes.</p>
+<p class="intro-note"><strong>Cómo se ha construido.</strong> Dos análisis independientes sobre los mismos datos, sometidos a crítica cruzada y revisión mutua antes de esta síntesis. Las conclusiones que no sobrevivieron a esa crítica se han retirado y así se indica. El informe no predice un único futuro: construye tres escenarios con sus mecanismos, previsiones verificables en fechas concretas y señales que avisan de hacia dónde se mueve el mundo.</p>
+<p class="intro-note"><strong>Advertencia esencial.</strong> No conocemos la estrategia interna real de Société Générale España. Este informe trabaja sobre lo que se puede observar desde fuentes públicas. Cuando algo es un dato, lo decimos; cuando es interpretación nuestra, lo decimos; cuando es una hipótesis que ustedes deben confirmar o corregir, lo decimos; y cuando sencillamente no lo sabemos, también. Ninguna decisión se presenta como recomendación cerrada: todas son cuestiones que el comité debería considerar.</p>
+<p class="intro-note"><strong>Vigencia.</strong> Julio de 2026. El documento caduca: debe revisarse cada trimestre y cada vez que una señal del cuadro de vigilancia cruce su umbral.</p>
+        <div class="hero-metrics">
+          <div class="metric"><b>Escenarios</b><span>3</span></div>
+          <div class="metric"><b>Previsiones</b><span>12</span></div>
+          <div class="metric"><b>Decisiones</b><span>22</span></div>
+          <div class="metric"><b>Señales</b><span>20</span></div>
+        </div>
+        <div class="source-strip">
+          <div class="panel-box"><b>Estilo</b><p>et-book, fondo #fffff8, bordes negros, serif editorial y cajas cuadradas.</p></div>
+          <div class="panel-box"><b>Columnas</b><p>La izquierda cruza escenarios y años; la derecha cruza decisiones, red flags e indicadores.</p></div>
+          <div class="panel-box"><b>Cobertura</b><p>El Markdown del informe está convertido completo debajo, con sus tablas originales.</p></div>
+        </div>
+        <div class="visual-board" aria-label="Tres tensiones principales del informe">
+          <div class="visual-card dark">
+            <span class="eyebrow">La idea que manda</span>
+            <strong>No gana quien use más IA. Gana quien capture mejor el valor.</strong>
+            <p>El comité debe separar capacidad técnica, permiso bancario, integración real y margen local. Sin esa cadena, el ahorro es solo una promesa bonita.</p>
+          </div>
+          <div class="visual-mini-grid">
+            <div class="visual-mini"><b>Interfaz</b><span>CFO / TMS / API</span></div>
+            <div class="visual-mini"><b>Grupo</b><span>Madrid vs hubs</span></div>
+            <div class="visual-mini"><b>Captura</b><span>Precio / margen</span></div>
+          </div>
+        </div>
+      </section>
+      <section class="chapter" id="1-resumen-ejecutivo" data-state="resumen" data-year="2026">
+<h2>1. Resumen ejecutivo</h2>
+<h3>Tres tesis principales</h3>
+<div class="spotlight-grid" aria-label="Tesis visuales del resumen ejecutivo">
+  <div class="quote-card"><span class="eyebrow">Tesis 1</span><strong>Difusión gobernada, con peaje.</strong><p>La capacidad corre más que el permiso. La ventaja está en industrializar cumplimiento, no en anunciar pilotos.</p></div>
+  <div class="quote-card"><span class="eyebrow">Tesis 2</span><strong>Tres desplazamientos silenciosos.</strong><p>Interfaz del CFO, funciones hacia hubs y ahorro cedido al cliente vía precio.</p></div>
+  <div class="quote-card"><span class="eyebrow">Tesis 3</span><strong>Medirse antes de invertir.</strong><p>Sin NBI por naturaleza, ciclo comercial y mapa Madrid-París, cualquier cifra es teatro.</p></div>
+</div>
+<p><strong>Primera. El escenario más probable no es ni la revolución ni el statu quo: es una difusión gobernada, con peaje.</strong> La capacidad de la IA avanza más deprisa que el permiso para usarla en banca regulada. Para Société Générale España, el peaje que importa no es el reglamento europeo de IA —cuyas obligaciones más exigentes se han aplazado a diciembre de 2027 y afectan menos a un banco mayorista sin clientela minorista— sino la supervisión prudencial continua del BCE, que ha hecho de la gobernanza de la IA una de sus prioridades para 2026-2028 y que no tiene fecha de aplazamiento. La lectura correcta del aplazamiento es incómoda: no es una ventana de libertad, es un plazo de preparación. Y quien industrialice el cumplimiento convertirá ese peaje en una ventaja competitiva frente a quienes lo sufran como coste.</p>
+<p><strong>Segunda. La amenaza específica para este banco no es un chatbot ni un competidor concreto: son tres desplazamientos silenciosos.</strong> Uno: la relación con el director financiero puede migrar hacia plataformas de tesorería potenciadas con IA (los sistemas de gestión de tesorería, los ERP, las plataformas multibanco) — el banco conservaría el producto y el balance, pero perdería la interfaz, los datos y el poder de fijar precios. Dos: las funciones pueden migrar hacia los centros del grupo — si la IA industrializa la fábrica de París, Madrid puede conservar la cuenta de resultados y perder capacidad organizativa sin que nadie lo anuncie; lo llamamos &quot;Madrid sin fábrica&quot;. Tres: el ahorro puede migrar hacia el precio — en banca mayorista competitiva, la mayor parte de la productividad se acaba cediendo al cliente; solo se retiene margen donde hay balance, licencia, firma o confianza. De aquí sale la conclusión más contraintuitiva del análisis: <strong>el mapa de estabilidad puede estar invertido</strong>. Las líneas que hoy se consideran estables y recurrentes —el negocio transaccional, el flujo de divisas y coberturas sencillas con empresas— son las primeras que se comoditizan. Las que se consideran volátiles —la estructuración compleja donde el banco firma y responde— son las que resisten.</p>
+<p><strong>Tercera. El banco no puede decidir todavía, porque no se conoce a sí mismo en la dimensión que ahora importa.</strong> No sabemos —y es probable que tampoco esté desglosado internamente— qué parte de los 542 millones de ingresos de España cobra por horas de experto, qué parte por comprometer balance, qué parte por firmar y responder, y qué parte simplemente por la fricción que el cliente no puede evitar hoy. Tampoco está claro el perímetro de esa cifra: un margen del 61% sobre ingresos es anómalo para una franquicia con custodia y transaction banking, y sugiere que la cifra país no recoge todos los costes. Y no sabemos dónde está el cuello de botella real de las operaciones: puede estar en Madrid o puede estar en los comités de París. Por eso la primera inversión que este informe plantea no es tecnología: es <strong>medirse a uno mismo, y presentar el caso de España ante el grupo antes de que otros decidan por Madrid</strong>.</p>
+<h3>Tres riesgos de no hacer nada</h3>
+<ol><li><strong>Bajar precios tarde.</strong> La custodia estándar, la ejecución y la administración van a ver presión de precios en los próximos años, sea por la IA o por la tendencia del sector. Esperar a que el mercado baje el precio, en lugar de reempaquetar la oferta y reprecificar primero, es el riesgo más probable y el más evitable de todo el análisis.</li><li><strong>Llegar tarde al reparto del grupo.</strong> Es muy probable (lo estimamos entre el 70% y el 85%) que el grupo anuncie antes de finales de 2027 un programa de IA con objetivos cuantificados. Cuando eso ocurra, el reparto de funciones, presupuesto y ahorro entre países quedará fijado. Un caso de España presentado después del anuncio no negocia: ejecuta lo que otros decidieron.</li><li><strong>No haber modelado la fuga de depósitos a velocidad de máquina.</strong> Esta sucursal no tiene depósitos minoristas; se financia en el mercado mayorista y dentro del grupo, y sus depósitos de clientes ya cayeron un 3,6% en 2025. Basta la versión suave del escenario de plataformización —agentes de tesorería moviendo el efectivo cada noche al mejor precio— para que ese pasivo se vuelva estructuralmente nómada. No nos consta que el comité de activos y pasivos lo haya estresado.</li></ol>
+<h3>Tres decisiones que el comité debería discutir primero</h3>
+<ol><li><strong>El caso de España ante París</strong>: qué funciones, qué datos, qué presupuesto de integración y qué asiento en la gobernanza de IA del grupo reclama Madrid. Es la única decisión cuya ventana de oportunidad no depende de este comité.</li><li><strong>El paquete de medición</strong>: desglosar los ingresos por su naturaleza y reconciliar la cifra país; medir los tiempos reales de alta de cliente y de aprobación de crédito, fase por fase; y levantar el mapa de qué funciones están en Madrid y cuáles en los centros del grupo.</li><li><strong>El estrés del pasivo corporativo</strong> a velocidad de máquina, con un plan de financiación alternativa. Como análisis, ya.</li></ol>
+<h3>Tres señales que habría que empezar a vigilar hoy</h3>
+<ol><li><strong>El programa de IA del grupo</strong>: el anuncio, y sobre todo si menciona o no a España en la asignación. Marca el reloj del caso-país.</li><li><strong>El primer incidente o sanción pública por IA en un banco europeo significativo</strong> (lo estimamos entre el 40% y el 60% antes de finales de 2028): cuando ocurra, la ventana para aprobar casos propios se estrechará durante seis a doce meses. Conviene tener los casos críticos aprobados antes.</li><li><strong>El primer banco europeo que documente públicamente un agente de IA funcionando en producción supervisada</strong> con resultados auditados: es el aviso de que el escenario rápido se activa.</li></ol>
+<hr />
+</section>
+<section class="chapter" id="2-punto-de-partida" data-state="partida" data-year="2026">
+<h2>2. Punto de partida</h2>
+<h3>2.1. Qué sabemos del negocio</h3>
+<p>Los datos siguientes proceden de fuentes públicas y de las cuentas publicadas.</p>
+<ul><li>La pieza central es <strong>Société Générale, Sucursal en España</strong>: una sucursal del banco matriz francés, no una filial con capital propio. Sin banca minorista desde 1992; Self Bank se vendió en 2018-19; el negocio de equipment finance (SGEF) se vendió a BPCE, con cierre en febrero de 2025.</li><li>El perímetro visible en España: banca corporativa y de inversión (financiación, sindicados, financiación estructurada y de proyectos, mercados de capitales, asesoramiento), mercados globales, transaction banking (gestión de tesorería y comercio exterior), servicios de valores (custodia, liquidación, depositaría, agencia), <strong>Ayvens</strong> en renting y movilidad (86,9 millones de beneficio neto, 242.108 vehículos y 828 empleados en 2025), <strong>Genefim</strong> en financiación inmobiliaria profesional (400,5 millones de activos, +51%), <strong>Treezor</strong> en infraestructura de pagos para fintechs (sin cifras locales públicas) y <strong>Altura Markets</strong>, la sociedad de valores al 50% con BBVA en derivados cotizados.</li><li>Cifras de 2025. País: 542 millones de ingresos, 329 millones de beneficio antes de impuestos, 1.066 empleados. Sucursal bancaria: 9.714 millones de activos (+7,6%); préstamos a clientes +12,9%; depósitos de clientes −3,6%; <strong>margen de intereses −25,8% y comisiones +17,4%</strong>; cuota de mercado por activos en torno al 0,32%.</li><li>Nuestra lectura del modelo: el banco monetiza complejidad y relación institucional con tres motores —uso selectivo del balance, comisiones recurrentes y transaccionales, y plataformas con activos físicos—. Depende de pocas relaciones de alto valor, de financiación sin depósitos minoristas y, estructuralmente, de la matriz: los límites, los sistemas, el capital y buena parte de las decisiones de riesgo se comparten con París.</li><li>La estrategia del grupo (simplificación, disciplina de capital, eficiencia: la ratio de costes bajó del 69% al 63,6% y la rentabilidad subió del 6,9% al 10,2%) sugiere para España una franquicia mayorista especializada sin vuelta al minorista. Pero eso es interpretación nuestra: <strong>las prioridades reales de España no las conocemos</strong>.</li></ul>
+<h3>2.2. Qué sabemos del mercado</h3>
+<ul><li>La banca española está muy concentrada (las cinco mayores rondan el 70%) y ha sido muy rentable en 2024-2025, con márgenes normalizándose por las bajadas de tipos. Los bancos domésticos dominan las clasificaciones locales (en sindicados, a septiembre de 2025: CaixaBank 16,3%, Santander 11,3%, BBVA 8,0%) y la relación primaria con las empresas.</li><li>Los segmentos donde compite Société Générale crecen: los préstamos sindicados subieron un 36% hasta septiembre de 2025 (85.658 millones), tirados por telecomunicaciones, energía e infraestructura digital; la financiación sostenible alcanzó 65.705 millones en 2024; la gestión de activos ronda el billón de euros; el crédito privado no bancario supera los 2,2 billones de dólares a nivel global y crece en España.</li><li>La regulación (MiFID, EMIR, DORA, blanqueo, protección de datos, impuesto bancario) es a la vez un coste y una barrera de entrada: en servicios institucionales, los clientes compran seguridad, continuidad y cumplimiento, no solo precio.</li></ul>
+<h3>2.3. Qué no sabemos todavía</h3>
+<p>Cinco carencias bloquean cualquier cálculo serio de impacto: (1) el desglose de los ingresos por línea y, sobre todo, por naturaleza —horas de experto, balance, firma, acceso, flujo—; (2) la reconciliación de la cifra país con los costes reales; (3) el mapa de funciones y de contabilización entre Madrid y los centros del grupo; (4) el ciclo comercial medido fase a fase, para saber dónde está de verdad el cuello de botella; (5) los datos propios de flujo y de pasivo (ratios de éxito en cotizaciones, rotación de depósitos). Detrás de esas cinco: las prioridades y objetivos de España para 2026-2030, el apetito de riesgo efectivo, la inversión tecnológica, el inventario de usos de IA, las personas clave, las cuotas reales por producto, la sensibilidad de Ayvens al valor residual del vehículo eléctrico y el papel real de Treezor y Altura en el perímetro español.</p>
+<h3>2.4. Limitaciones de este análisis</h3>
+<p>Cuatro, dichas sin rodeos: (a) lo que se somete a prueba es una <strong>reconstrucción externa</strong> de la posición del banco, no su estrategia real; (b) las magnitudes económicas que aparecen son órdenes de magnitud para priorizar, <strong>no cifras para dimensionar inversiones</strong>; (c) la referencia tecnológica es un único modelo de previsión, con dos calibraciones que divergen en unos dos años, y se revisa cada trimestre; (d) las probabilidades salen del contraste entre dos análisis independientes, no de datos internos del banco — cuando el banco se mida, algunas se moverán.</p>
+<hr />
+</section>
+<section class="chapter" id="3-la-tecnologia-que-esperar-de-aqui-a-2030" data-state="tecnologia" data-year="2026">
+<h2>3. La tecnología: qué esperar de aquí a 2030</h2>
+<h3>3.1. La referencia utilizada</h3>
+<p>Usamos como referencia el modelo de previsión del AI Futures Project, actualizado trimestralmente, y no sus escenarios narrativos más agresivos. Su hito central es la automatización completa de la programación al nivel del mejor ingeniero. Las calibraciones sitúan la mediana de ese hito entre finales de 2029 y 2032, según los parámetros; la actualización más reciente adelantó una de ellas hacia mediados de 2028. Reportamos el rango completo y lo revisaremos cada trimestre. Lo empíricamente más sólido que hay detrás: la duración de las tareas que los agentes de IA completan con éxito <strong>se duplica cada cuatro a siete meses</strong>, de forma sostenida desde 2019.</p>
+<h3>3.2. De la capacidad al impacto: siete puertas</h3>
+<p>Que la tecnología pueda hacer algo no significa que llegue a la cuenta de resultados. Entre medias hay siete puertas: capacidad técnica, coste de uso, fiabilidad certificable, integración con los sistemas existentes, permiso regulatorio, adopción por la organización y, la última y decisiva, <strong>captura económica</strong>. Lo importante es la composición: para un proceso concreto de un banco concreto, la probabilidad de que todas las puertas se abran a corto plazo es baja —un cálculo sencillo la sitúa en torno al 7-8% para 2027—, aunque cada puerta por separado parezca probable. En cambio, a nivel de sector, con cientos de intentos en paralelo, que <em>algún</em> banco lo logre en <em>algún</em> proceso es casi seguro. Esa asimetría —raro en cada caso, seguro en el conjunto— es la que da forma a los tres escenarios.</p>
+<h3>3.3. Capacidad, adopción y captura no son lo mismo</h3>
+<p>Tres afirmaciones distintas que este informe no mezcla en ningún momento:</p>
+<ul><li><strong>Capacidad</strong>: lo que la tecnología puede hacer en una prueba. Es alta y creciente. Por sí sola no justifica ninguna inversión.</li><li><strong>Adopción real</strong>: un sistema funcionando en producción en banca regulada, con trazabilidad, tasa de error auditada y aprobación del riesgo de modelo. Va dos a cuatro años por detrás de la capacidad, porque cada escalón —caso de uso, comité, piloto, validación, producción supervisada— consume de seis a dieciocho meses.</li><li><strong>Captura económica</strong>: la cadena completa. Del ahorro bruto, una parte se pierde en gobernar y supervisar el propio sistema; de lo que queda, otra parte se cede en precio por la competencia; solo el resto es captura neta. En banca mayorista competitiva, ceder es la norma. Y hay un agravante propio de esta casa: el ahorro operativo se produce mayoritariamente en los centros del grupo, fuera de España — no aparece en la cuenta local; se convierte en munición de precios global. <strong>Regla de este informe: ningún ahorro de horas se presenta como euros sin esa cadena completa.</strong></li></ul>
+<div class="flow-diagram" aria-label="Flujo de capacidad a captura económica">
+  <div class="flow-title"><b>De demo a margen local</b><em>La tecnología solo abre la primera puerta.</em></div>
+  <div class="flow-row">
+    <div class="flow-node"><b>1</b><span>Capacidad</span></div>
+    <div class="flow-node"><b>2</b><span>Coste</span></div>
+    <div class="flow-node"><b>3</b><span>Fiabilidad</span></div>
+    <div class="flow-node"><b>4</b><span>Integración</span></div>
+    <div class="flow-node"><b>5</b><span>Permiso</span></div>
+    <div class="flow-node"><b>6</b><span>Adopción</span></div>
+    <div class="flow-node final"><b>7</b><span>Captura</span></div>
+  </div>
+</div>
+<p>La traducción para banca mayorista: dentro del horizonte del plan, lo esperable es la automatización profunda del trabajo intelectual <strong>estructurado y verificable</strong> —código, documentación, conciliaciones, extracción de datos, primeras redacciones de análisis—. El juicio difícil de verificar —la estructuración novedosa, la lectura de la contraparte, la negociación, el apetito de riesgo— va sistemáticamente por detrás. La restricción que mandará entre 2026 y 2030 no será la llegada de la tecnología: será el permiso, la integración y, sobre todo, la decisión de dónde captura el grupo.</p>
+<hr />
+</section>
+<section class="chapter" id="4-doce-previsiones-clave" data-state="forecasts" data-year="2027">
+<h2>4. Doce previsiones clave</h2>
+<p>Doce previsiones verificables en fechas concretas, contrastadas entre los dos análisis independientes. Las probabilidades son rangos deliberados: la precisión de más sería falsa. Dos previsiones van sin cifra: ponérsela hoy sería decorar. Ninguna de estas bandas sirve para dimensionar una inversión; sirven para ordenar prioridades y para saber qué vigilar.</p>
+<div class="impact-strip" aria-label="Previsiones que cambian decisiones">
+  <div><b>Puerta rápida</b>P2 abre producción supervisada si hay métricas, error auditado y aprobación de riesgo.</div>
+  <div><b>Puerta cerrada</b>P3 mantiene humano significativo en crédito/advisory: 5-10% antes de 2028.</div>
+  <div><b>Reloj de grupo</b>P10a/P10b deciden cuándo y cómo defender el caso de España ante París.</div>
+</div>
+<div class="table-frame" data-table-index="1"><table><thead><tr><th>#</th><th>Pregunta</th><th>Se resuelve</th><th>Probabilidad</th><th>Solidez de la estimación</th><th>Aviso temprano</th><th>Decisión que podría cambiar</th></tr></thead><tbody><tr><td>P1</td><td>¿Se alcanzará antes de fin de 2030 la automatización completa de la programación, según los evaluadores de referencia?</td><td>31/12/2030</td><td>35-50%</td><td>Media</td><td>Tareas de 40 horas completadas por agentes; coste de uso cayendo más de 5 veces al año</td><td>El calendario del plan de talento tecnológico. <strong>Por sí sola no activa ninguna inversión</strong></td></tr><tr><td>P2</td><td>¿Habrá antes de fin de 2028 al menos dos bancos europeos significativos con un agente de IA <strong>en producción supervisada</strong> (alta de clientes, documentación de crédito u operaciones), con ahorro neto ≥30% demostrado, error auditado no peor que el humano y aprobación formal del riesgo de modelo?</td><td>31/12/2028</td><td>15-30%</td><td>Baja</td><td>El primer caso público con métricas, no con adjetivos</td><td>Pasar de pilotos a producción supervisada; es la puerta del escenario rápido</td></tr><tr><td>P3</td><td>¿Permitirán los supervisores antes de fin de 2028 decisiones individuales de crédito o asesoramiento <strong>sin intervención humana significativa</strong>?</td><td>31/12/2028</td><td><strong>5-10%</strong></td><td>Alta</td><td>Consultas de la EBA sobre IA en modelos internos</td><td>Diseñar todo asumiendo supervisión humana permanente, y presupuestarla como coste estructural</td></tr><tr><td>P4</td><td>¿Se publicarán antes de mediados de 2027 la guía europea de clasificación de alto riesgo y al menos un estándar técnico aplicable a crédito?</td><td>30/06/2027</td><td>40-60%</td><td>Baja</td><td>La guía estaba prevista para febrero de 2026 y sigue sin publicarse</td><td>Preparar los expedientes de cumplimiento sobre estándar oficial o sobre criterio propio documentado</td></tr><tr><td>P5</td><td>¿Llegará antes de fin de 2027 al menos el 15% de las peticiones de oferta de los 50 mayores clientes en formato estructurado o exigiendo conexión por API?</td><td>31/12/2027</td><td>20-40%</td><td>Baja</td><td>La primera petición de oferta con cláusulas de IA</td><td>Construir la interfaz digital para clientes. <strong>Imposible de medir sin instrumentar antes el CRM</strong></td></tr><tr><td>P6</td><td>¿Operarán antes de fin de 2029 al menos cinco tesorerías del IBEX-35 con una capa tecnológica que decida por defecto (ejecuta salvo veto) el reparto de efectivo y divisas entre bancos?</td><td>31/12/2029</td><td>30-50%</td><td>Baja-media</td><td>Lanzamiento comercial de ejecución autónoma en los grandes sistemas de tesorería</td><td>El estrés del pasivo; la estrategia ante las plataformas que se interponen entre banco y cliente</td></tr><tr><td>P7</td><td>¿Duplicará el crédito privado no bancario en España su volumen de originación de 2024 antes de 2029?</td><td>30/06/2030</td><td>40-55%</td><td>Baja</td><td>Cuota no bancaria superior al 30% en operaciones medianas</td><td>Lanzar o no una franquicia de financiación y servicios a esos fondos</td></tr><tr><td>P8</td><td>¿Caerá el margen realizado en divisas, tipos y tesorería sencilla con empresas (España, ajustado por mezcla de producto) un 15% o más frente a 2025, antes de fin de 2030?</td><td>31/12/2030</td><td>35-55%</td><td>Baja</td><td>Ratio de éxito en cotizaciones cayendo un 20% con patrones horarios de máquina</td><td>Dónde defender margen y dónde comprar volumen; cuándo reprecificar</td></tr><tr><td>P9</td><td>¿Habrá antes de fin de 2028 una sanción o actuación supervisora pública en la UE señalando un sistema de IA como causa material de un incidente en un banco significativo?</td><td>31/12/2028</td><td>40-60%</td><td>Baja</td><td>Inspección temática del BCE sobre IA generativa</td><td>Aprobar los casos propios críticos <strong>antes</strong> del incidente ajeno; tener listo el plan de contingencia</td></tr><tr><td>P10a</td><td>¿Anunciará el grupo antes de fin de 2027 un programa de IA con objetivo cuantificado público?</td><td>31/12/2027</td><td><strong>70-85%</strong></td><td>Alta</td><td>Nombramientos y partidas de inversión en IA</td><td>El momento de presentar el caso de España</td></tr><tr><td>P10b</td><td>¿Publicará ese programa un reparto por países que mencione a España, antes de mediados de 2027?</td><td>30/06/2027</td><td>Sin cifra aún</td><td>—</td><td>La propia comunicación del grupo</td><td><strong>Esta es la previsión que decide</strong>; la anterior solo marca el reloj</td></tr><tr><td>P11</td><td>¿Sufrirá Ayvens España antes de fin de 2030 un impacto material del valor residual del vehículo eléctrico usado en precios, provisiones o resultado?</td><td>31/12/2030</td><td>45-65%</td><td>Baja-media</td><td>Diferenciales de precio del eléctrico usado frente al de combustión; días de stock</td><td>Precios predictivos del valor residual; revisión de las curvas de depreciación</td></tr><tr><td>P12</td><td>¿Registrará el mapa semestral de funciones una migración neta de Madrid hacia los centros del grupo por encima del umbral que fije la línea base, entre 2026 y 2028?</td><td>31/12/2028</td><td>Sin cifra aún</td><td>—</td><td>Vacantes locales absorbidas por los centros; proporción senior/junior local</td><td>El plan de talento local y el contenido del caso-país</td></tr></tbody></table></div>
+<p><strong>Cómo leer la tabla.</strong> La distancia entre lo posible y lo permitido es la forma del periodo: P1 (35-50%) → P2 (15-30%) → P3 (5-10%) es una cadena, no una lista — cada eslabón exige el anterior más varias condiciones adicionales. Tres previsiones se resuelven ya en 2026-27 y funcionan de aviso temprano (P4, P5, P10b). Y dos no pueden medirse sin que el banco se instrumente antes (P5, P8): <strong>medirse y prever son, aquí, la misma decisión.</strong></p>
+<hr />
+</section>
+<section class="chapter" id="5-tres-escenarios-2026-2030" data-state="escenarios" data-year="2028">
+<h2>5. Tres escenarios 2026-2030</h2>
+<p>Los pesos son deliberadamente cualitativos —central, relevante, cola— porque un porcentaje aquí sería precisión falsa. El Escenario 2 es el mundo central; el Escenario 1 es su variante rápida (el mismo mecanismo, con las puertas abriéndose antes); el Escenario 3 es la discontinuidad específica de este banco. Dentro del Escenario 2 se contempla también su variante decepcionante —la tecnología mejora pero el retorno no llega— porque es la que de verdad pone a prueba el ritmo de inversión. Y el eje &quot;Madrid sin fábrica&quot; atraviesa los tres y se evalúa en la sección 6.</p>
+<div class="scenario-lab" aria-label="Explorador interactivo de escenarios">
+  <div class="scenario-lab-header">
+    <h3>Elija el futuro que quiere analizar</h3>
+    <p>Al seleccionar un escenario cambian la tesis, la evolución por año, los impactos principales, las decisiones y las señales. El informe completo sigue debajo, sin recortar texto.</p>
+  </div>
+  <div class="scenario-selector" role="tablist" aria-label="Escenarios 2026-2030">
+    <button type="button" class="scenario-btn active" data-scenario-button="factory" role="tab" aria-selected="true">
+      <span class="weight"><span>Escenario 1</span><span>Relevante</span></span>
+      <span class="name">La fábrica cognitiva</span>
+      <span class="hint">Aceleración fuerte: automatización en hubs, precio a la baja y valor en capital, datos y confianza.</span>
+    </button>
+    <button type="button" class="scenario-btn" data-scenario-button="peaje" role="tab" aria-selected="false">
+      <span class="weight"><span>Escenario 2</span><span>Central</span></span>
+      <span class="name">Difusión con peaje</span>
+      <span class="hint">La IA entra por eficiencia supervisada. Gana quien industrializa permiso, cumplimiento y captura.</span>
+    </button>
+    <button type="button" class="scenario-btn" data-scenario-button="platform" role="tab" aria-selected="false">
+      <span class="weight"><span>Escenario 3</span><span>Discontinuidad</span></span>
+      <span class="name">La plataforma se queda con el cliente</span>
+      <span class="hint">El banco conserva producto y balance, pero puede perder interfaz, datos y pricing power.</span>
+    </button>
+  </div>
+  <div class="scenario-summary" id="scenarioSummary" role="tabpanel" aria-live="polite"></div>
+  <div class="scenario-timeline" id="scenarioTimeline" aria-label="Evolución 2026-2030 del escenario seleccionado"></div>
+  <div class="scenario-dock"><b>Escenario que se está leyendo</b><span id="scenarioDock">La fábrica cognitiva · relevante</span></div>
+</div>
+<hr />
+<h3>Escenario 1 — «La fábrica cognitiva» (aceleración fuerte)</h3>
+<p><strong>Tesis.</strong> El coste del trabajo intelectual estructurado se desploma entre 2027 y 2029; la ventaja en banca mayorista deja de ser &quot;tener expertos&quot; y pasa a ser &quot;tener capital, datos, distribución y licencia para operar máquinas expertas&quot; — y Société Générale España prospera o se encoge según lo que decida París, no Madrid.</p>
+<p><strong>Peso: relevante.</strong> Exige que la producción bancaria supervisada (P2) llegue pronto y que la integración con los sistemas se resuelva antes de 2028. Hoy es improbable, pero no despreciable.</p>
+<p><strong>Mecanismo.</strong> Agentes fiables pronto → los centros del grupo automatizan primero el desarrollo, luego la documentación, luego la producción de análisis → el coste de estructurar y documentar cae un orden de magnitud → la competencia traslada el ahorro al precio en todo lo replicable → el margen solo sobrevive donde hay un cuello físico o regulatorio: balance, licencia, colateral, confianza. El ahorro de horas no aparece en la cuenta de Madrid: se convierte en munición de precios global.</p>
+<p><strong>Evolución.</strong></p>
+<ul><li><strong>2026.</strong> Copilotos por todas partes; agentes de operaciones en piloto. La rotación hacia comisiones ya está en marcha en España — por el ciclo de tipos, no por la IA.</li><li><strong>2027.</strong> Los centros del grupo despliegan agentes de documentación con supervisión por excepción; los borradores de operaciones se producen en horas; se congela la contratación de analistas junior; los tiempos de respuesta a peticiones de oferta bajan de semanas a días en todo el sector a la vez.</li><li><strong>2028.</strong> Compresión visible de las comisiones de aseguramiento y agencia; probable primer incidente grave del sector, con una pausa supervisora que castiga a quien iba tarde.</li><li><strong>2029.</strong> El valor migra a tres sitios: el capital, los datos propios de flujo y la relación de confianza con quien decide. Las operaciones intermedias se reducen estructuralmente en los centros del grupo; el crédito privado con IA toma el mercado mediano al doble de velocidad.</li><li><strong>2030.</strong> El sector tiene costes más bajos e ingresos unitarios también más bajos; la rentabilidad mejora menos de lo que el ahorro prometía, porque la mitad se cedió en precio. Société Générale España, bien jugado: menos personas, más volumen intermediado, banqueros senior potenciados. Mal jugado: distribuidora de lo que fabrican otros.</li></ul>
+<p><strong>Impacto en el modelo de negocio.</strong> Volumen al alza, ingreso unitario a la baja. Las comisiones por &quot;hacer&quot; caen; las comisiones por &quot;responder de&quot; resisten, porque venden responsabilidad, no horas. El balance se revaloriza como diferenciador — con una salvedad honesta: si la demanda de crédito bancario también cae por la competencia de los fondos, el retorno sobre el balance puede bajar en vez de subir. La relación deja de pagarse por información y pasa a pagarse por ejecución, riesgo y acceso.</p>
+<p><strong>Impacto en el modelo operativo.</strong> El banquero de cobertura pasa de coordinar especialistas a dirigir agentes. El grueso del cambio ocurre en las operaciones intermedias — que están mayoritariamente fuera de España. El riesgo y el cumplimiento no se abaratan: se transforman (nace la supervisión de agentes). Y se rompe la escalera de aprendizaje junior-senior: un problema que estalla en 2030-2032, justo fuera del plano de este escenario.</p>
+<p><strong>Impacto en mercado y grupos de interés.</strong> Los bancos domésticos convierten sus depósitos y sus datos en músculo inversor; los americanos llegan con la fábrica más avanzada; el espacio del &quot;internacional mediano especializado&quot; —donde vive esta casa— se estrecha por los dos lados. Los clientes ganan poder de comparación. Los reguladores, desbordados, responden con más procedimiento. Los proveedores de IA pasan de suministradores a contrapartes casi sistémicas.</p>
+<p><strong>Preguntas incómodas para el comité.</strong></p>
+<ol><li>Si el coste de estructurar cae diez veces, ¿qué parte exacta de nuestros 542 millones cobra hoy por horas de experto que mañana serán gratis?</li><li>¿Cuántos mandatos de 2025 se ganaron por el análisis y cuántos por el balance o la relación? Si no sabemos separarlo, no sabemos qué defiende la franquicia.</li><li>Cuando el grupo automatice la fábrica en París, ¿qué argumento tendrá Madrid para retener funciones —y el beneficio asociado— más allá de la cobertura comercial?</li><li>¿Estamos dispuestos a dejar de contratar analistas junior sabiendo que en 2032 no tendremos directores formados?</li></ol>
+<p><strong>Avisos tempranos.</strong> El primer banco europeo con producción documentada (P2); la caída de más del 30% en ofertas de empleo junior en banca de inversión europea; la compresión de más del 15% en comisiones de sindicados; el anuncio del programa del grupo (P10a).</p>
+<hr />
+<h3>Escenario 2 — «Difusión con peaje» (el mundo central)</h3>
+<p><strong>Tesis.</strong> La capacidad avanza más deprisa que el permiso. La IA entra en la banca europea de dentro afuera —eficiencia antes que producto, supervisada antes que autónoma—, el retorno es real pero desigual, y gana quien convierte el peaje regulatorio en ventaja mientras los actores no bancarios toman lo que la regulación deja fuera.</p>
+<p><strong>Peso: central.</strong> Es el escenario que exige menos condiciones, y casi todas están ya cumplidas: la capacidad de hoy basta para la mayor parte de él; la puerta de la autonomía plena está cerrada (P3, 5-10%); el calendario regulatorio está confirmado; la adopción bancaria avanza a velocidad de comité.</p>
+<p><strong>Su variante decepcionante, dentro del mismo escenario.</strong> Las capacidades mejoran pero la mayoría de los pilotos no llega a la cuenta de resultados: datos pobres, integración lenta, coste de control, falta de captura. En esa variante, lo correcto es medir, seguir al grupo con rapidez y concentrar la inversión donde el cuello y el retorno estén probados. Sus avisos: dos trimestres seguidos sin avance tecnológico y retornos negativos reportados por los programas de bancos comparables.</p>
+<p><strong>Mecanismo.</strong> La capacidad crece en exponencial; la adopción bancaria avanza por escalones —caso de uso, comité, piloto, validación, producción supervisada—, cada uno de seis a dieciocho meses. Resultado: una curva de adopción retrasada dos a cuatro años respecto a la técnica. Mientras tanto, los costes internos bajan de verdad en lo documental; el precio de lo replicable baja porque todos recorren la misma curva; los actores sin peaje (fondos, tecnológicas) ocupan los bordes; y el juicio humano que firma se convierte en el recurso escaso y sube de precio. Del ahorro bruto, la mitad se la come la gobernanza del propio sistema; de lo que queda, una parte se cede en precio; la captura neta se concentra donde hay poder de fijación: complejidad genuina, responsabilidad legal, balance, velocidad certificada.</p>
+<p><strong>Evolución.</strong></p>
+<ul><li><strong>2026.</strong> Copilotos por todas partes, agentes en piloto perpetuo; las obligaciones más duras del reglamento europeo, aplazadas a diciembre de 2027; los supervisores publican principios, no permisos.</li><li><strong>2027.</strong> Producción supervisada en los dominios de bajo riesgo: desarrollo, documentación interna, preparación de expedientes de alta de clientes, informes. El alta de un cliente baja de meses a semanas <strong>en los bancos que rediseñan el proceso</strong>, no en los que le añaden IA al proceso viejo. El grupo anuncia su programa (P10a).</li><li><strong>2028.</strong> La brecha entre &quot;rediseñadores&quot; y &quot;añadidores&quot; se hace visible en métricas comerciales: tiempo de alta, tiempo hasta el sí de crédito, coste por operación. Probable primer incidente del sector, con uno o dos trimestres de endurecimiento que premian a quien ya tenía casos aprobados. Las operaciones intermedias adelgazan por no reposición, no por despidos.</li><li><strong>2029.</strong> El coste de &quot;hacer&quot; ha caído; el precio de &quot;responder de&quot; ha subido. Las comisiones se parten en dos. El peso de los ingresos de España se desplaza otro tramo hacia mercados y servicios con responsabilidad; el beneficio local depende más que nunca de qué costes de los centros del grupo se repercuten al país.</li><li><strong>2030.</strong> El supervisor ya exige capacidades de IA (en blanqueo, en resiliencia), no solo las tolera. Société Générale España, en su mejor versión: alta de clientes más rápida que los bancos domésticos, la custodia reposicionada hacia datos y servicios de responsabilidad, banqueros senior potenciados y un peso del país defendido con argumentos. En su peor versión: las mismas mil personas haciendo lo mismo con herramientas mejores, cobrando comisiones más bajas por ello.</li></ul>
+<p><strong>Impacto en el modelo de negocio.</strong> Ingresos planos o moderadamente crecientes: más volumen contra precios unitarios a la baja. El margen de intereses sigue su ciclo de tipos; la IA no lo toca. Una regla operativa que el comité puede usar desde ya: <strong>toda comisión que un cliente pueda replicar con un agente en 2028 está en revisión de precio; toda comisión que requiera licencia, balance o firma, no.</strong> La certeza de ejecución —lo que ya compran los clientes de esta casa— se revaloriza. Y el cumplimiento excelente y rápido se convierte en foso.</p>
+<p><strong>Impacto en el modelo operativo.</strong> Front office potenciado, no sustituido; la métrica nueva es mandatos por senior, no personas. El cumplimiento es el gran ganador interno silencioso: lo que hoy es ventaja, en 2030 será estándar exigido. El alta de clientes puede pasar de cuello de botella a arma comercial para quien la rediseñe — posiblemente la inversión con mejor relación entre impacto y permiso de todo el periodo, <strong>como caso de negocio a construir, no como decisión ya tomada</strong>. La escalera de talento se estrecha sin romperse; el senior que no adopta las herramientas se vuelve caro.</p>
+<p><strong>Impacto en mercado y grupos de interés.</strong> Los domésticos industrializan el mercado mediano y defienden las grandes cuentas por precio; las clasificaciones apenas cambian, pero la economía de cada mandato se erosiona en su parte mecánica. En financiación compleja, la ventaja pasa a la velocidad del comité — y ahí esta casa depende de París: el riesgo es perder operaciones por lentitud, no por precio. Altura gana con el volumen de derivados cotizados. Los clientes empiezan a auditar el uso de IA de sus bancos: cláusulas al respecto en las peticiones de oferta desde 2027-28.</p>
+<p><strong>Preguntas incómodas para el comité.</strong></p>
+<ol><li>¿Cuál es hoy nuestro tiempo real de alta de un cliente corporativo complejo, y qué cifra estamos dispuestos a comprometer públicamente para 2028? Si ninguna, ¿por qué?</li><li>¿Qué comisiones nuestras son &quot;por hacer&quot; y cuáles &quot;por responder de&quot; — y quién es el dueño de reprecificar las primeras antes de que lo haga un competidor?</li><li>¿Puede nuestro comité de riesgos aprobar un caso de uso de IA en menos de 90 días? Si no, el cuello de botella somos nosotros, no el supervisor.</li><li>¿Tenemos inventario de todos los usos de IA de la casa, o solo de los oficiales? ¿Qué quedaría fuera si el supervisor pidiera evidencia mañana?</li><li>Y si en 2028 los programas de los bancos comparables reportan retornos decepcionantes: ¿qué habremos gastado que no sea recuperable — y qué habremos aprendido que sí?</li></ol>
+<p><strong>Avisos tempranos.</strong> La guía europea de clasificación y los estándares (P4); la primera guía del BCE/EBA sobre IA generativa en riesgo de modelo; algún banco publicitando alta de clientes corporativos en menos de 15 días; los márgenes de los custodios globales cayendo un 8% acumulado; cláusulas de IA en dos o más peticiones de oferta recibidas; casos internos aprobados esperando sistemas más de dos trimestres.</p>
+<hr />
+<h3>Escenario 3 — «La plataforma se queda con el cliente» (la discontinuidad propia de esta casa)</h3>
+<p><strong>Tesis.</strong> Entre 2027 y 2030, la relación con el director financiero la capturan capas tecnológicas —sistemas de tesorería, ERP, plataformas multibanco— potenciadas con IA. El banco conserva el producto y el balance, pero pierde la interfaz, los datos y el poder de fijar precios. El mecanismo por el que el balance y la relación se convierten en venta cruzada se erosiona <strong>sin que ningún cliente &quot;se vaya&quot;</strong>.</p>
+<p><strong>Peso: relevante-bajo</strong> como discontinuidad de mercado; su versión suave ya está en marcha (en divisas ocurrió hace años con las plataformas multibanco). La versión extrema —tesorerías cuyos agentes subastan cada necesidad en tiempo real— es un escenario de cola: poco probable en la ventana, de alto impacto, y se vigila con señales concretas.</p>
+<p><strong>Por qué es la discontinuidad de esta casa y no de la banca en general.</strong> Ataca el corazón del modelo: pocas relaciones de alto valor, donde el balance compra mandatos y la relación senior captura la venta cruzada. No necesita grandes saltos tecnológicos: bastan las capacidades de 2027-28 y la adopción del lado del cliente — que no paga el peaje supervisor bancario. Y tiene una ironía a favor: al tener poco flujo que perder y ningún depósito minorista que defender, Société Générale sufre aquí menos que los bancos domésticos, y hasta puede entrar en cuentas históricamente cerradas: cuando el panel lo decide una máquina, la historia pesa cero.</p>
+<p><strong>Mecanismo.</strong> Los sistemas de tesorería incorporan capas de decisión conectadas a los bancos por API → la capa compara en continuo divisas, depósitos, circulante y coberturas contra todo el panel bancario y ejecuta salvo veto → el humano del cliente pasa de negociar a aprobar excepciones → la ventaja informativa del banquero desaparece → la venta cruzada se rompe: cada producto se adjudica por separado al mejor postor → los márgenes del flujo convergen al coste → la plataforma cobra por el posicionamiento y se queda los datos. El ahorro lo capturan el cliente y la plataforma; al banco le queda defenderse o inventar servicios nuevos para ese intermediario.</p>
+<p><strong>Evolución.</strong></p>
+<ul><li><strong>2026.</strong> Copilotos en los grandes sistemas de tesorería; el flujo de divisas ya se subasta en parte; las API de gestión de tesorería son estándar. Falta la autonomía del lado del cliente.</li><li><strong>2027.</strong> Dos o tres tesorerías del IBEX (las de cultura más tecnológica) pilotan la optimización continua; las mesas notan cotizaciones a horas atípicas y ratios de éxito que caen si el precio no está entre los dos mejores; las peticiones de oferta de transaction banking empiezan a pedir &quot;integración con los agentes del cliente&quot;.</li><li><strong>2028.</strong> El patrón se extiende al depósito, al papel comercial y a las coberturas estándar; el banquero descubre que su interlocutor diario es un panel de control; el primer conflicto jurídico sobre una ejecución algorítmica disputada define el apetito legal del mercado.</li><li><strong>2029.</strong> La financiación estructurada, los proyectos y el asesoramiento resisten —la máquina no firma un contrato de financiación ni negocia una compraventa— pero pierden el subsidio cruzado del flujo; el precio de todo lo relacional se transparenta; emergen dos modelos viables: proveedor de volumen para la plataforma, o casa de complejidad con capital y firma. El término medio muere.</li><li><strong>2030.</strong> El mercado corporativo funciona en dos capas: una subasta continua de productos financieros estándar y un mercado de confianza para lo irreducible. Bien jugado: esta casa sale del flujo no rentable, redobla en complejidad-capital-firma y negocia su presencia y sus reglas en las plataformas. Mal jugado: una cobertura comercial cara para clientes que ya no la escuchan, márgenes de flujo evaporados y venta cruzada rota — la peor combinación posible para mil personas sin depósitos minoristas.</li></ul>
+<p><strong>Impacto en el modelo de negocio.</strong> Bifurcación: el flujo y lo transaccional, muy comprimidos; lo complejo, estable; y un ingreso nuevo posible —datos, precios en continuo, ejecución certificada para las plataformas— que pocos sabrán cobrar. El subsidio cruzado muere: la contabilidad analítica por producto y cliente pasa de higiene a supervivencia. Las comisiones por disponibilidad de líneas firmes y ejecutables suben: la opcionalidad comprometida es lo único que la capa no puede replicar.</p>
+<p><strong>Impacto en el modelo operativo.</strong> Cobertura comercial reducida y elevada: el banquero que sobrevive es el que diseña con el director financiero las reglas que gobiernan a su capa tecnológica — quien escribe las reglas captura el flujo que las reglas asignan. Procesamiento sin intervención manual como condición para permanecer en el panel. Y el riesgo nuevo de balance: depósitos corporativos estructuralmente nómadas — para una sucursal con financiación mayorista y depósitos ya cayendo, es <strong>el</strong> riesgo de este escenario. Aparece además una pregunta jurídica sin respuesta: ¿quién responde por la orden de un agente? La normativa de mercados no contempla al cliente-máquina; habrá que certificar agentes igual que hoy se identifica a clientes.</p>
+<p><strong>Impacto en mercado y grupos de interés.</strong> Los nuevos porteros son los proveedores de sistemas de tesorería y las plataformas multibanco: riesgo de que los bancos acaben siendo proveedores intercambiables dentro del mercado de otro. Los domésticos son los más expuestos en renta de relación; cabe esperar de ellos resistencia activa. Los internacionales pueden ganar cuota en cuentas donde nunca fueron primer banco — a márgenes que hay que querer. Y el regulador, ante el dilema entre la transparencia (que le gusta) y la fragilidad de liquidez (que le asusta), probablemente limite la velocidad de movimiento de los depósitos: una regulación que, irónicamente, protegería a esta casa.</p>
+<p><strong>Preguntas incómodas para el comité.</strong></p>
+<ol><li>¿Qué porcentaje de nuestros ingresos depende de márgenes que una capa de tesorería competente arbitraría mañana mismo? Nadie tiene hoy esa cifra; construirla es la primera decisión.</li><li>Si un IBEX-35 nos pide hoy precios en continuo por API para su agente de tesorería, ¿qué respondemos: sí, no, o &quot;déjame preguntar a París&quot;? ¿Y cuánto tarda cada respuesta?</li><li>¿Cuánto de nuestra venta cruzada es propuesta de valor y cuánto es fricción del cliente que la IA eliminará? La diferencia es nuestro ingreso en riesgo real.</li><li>Sin depósitos minoristas y con el pasivo corporativo moviéndose a velocidad de máquina: ¿ha modelado el comité de activos y pasivos esa volatilidad, o seguimos asumiendo la pegajosidad de 2019?</li><li>¿Qué papel queremos en esas plataformas: dentro pagando por posicionamiento, fuera defendiendo canal propio, o co-definiendo sus reglas — y quién lo negocia?</li></ol>
+<p><strong>Avisos tempranos.</strong> Lanzamiento comercial de ejecución autónoma en los grandes sistemas de tesorería; caída de más del 20% del ratio de éxito en divisas con patrones horarios de máquina en tres o más cuentas grandes (exige instrumentarse antes); dos o más peticiones de oferta pidiendo integración con agentes; el primer IBEX publicando ahorros de tesorería autónoma; rotación de depósitos operativos por encima del doble de la media histórica; la primera guía del supervisor de mercados sobre órdenes de agentes; el primer banco europeo lanzando una oferta para tesorerías autónomas.</p>
+<hr />
+</section>
+<section class="chapter" id="6-prueba-de-resistencia-que-aguanta-y-que-no" data-state="resistencia" data-year="2028">
+<h2>6. Prueba de resistencia: qué aguanta y qué no</h2>
+<h3>6.1. Cómo se ha hecho sin conocer la estrategia interna</h3>
+<p>No se puede estresar una estrategia que no se conoce. Lo que se ha sometido a los tres escenarios son tres cosas que sí existen: la <strong>posición observable</strong> del banco (perímetro, modelo económico, dependencias — datos e interpretaciones sólidas); seis <strong>hipótesis</strong> sobre lo que esa posición sugiere (que ustedes deben confirmar o corregir); y tres <strong>posturas posibles</strong> ante el cambio. Todos los veredictos son condicionales — &quot;si esta hipótesis es cierta, esta línea queda expuesta en este escenario, y este es el aviso&quot; — nunca categóricos. La versión con cifras queda pendiente de que el banco entregue el desglose de sus ingresos.</p>
+<h3>6.2. El modelo de negocio bajo los tres escenarios</h3>
+<p>La cartera de negocios —mayorista especializado, balance selectivo, comisiones institucionales, Ayvens, Treezor, Altura— sobrevive dignamente en los tres mundos; de hecho, el escenario central premia la especialización en profundidad. Lo que no sobrevive igual es el modelo operativo que la soporta (manual, lento de comité, sin medir) ni los precios heredados de todo lo que una máquina puede replicar. Y el hallazgo que invierte la intuición: <strong>las líneas hoy consideradas estables —el transaccional, el flujo con empresas, la custodia estándar— son las más expuestas; las consideradas volátiles —la estructuración donde el banco firma y responde— son las que resisten.</strong></p>
+<h3>6.3. Las seis hipótesis, a prueba</h3>
+<div class="table-frame" data-table-index="2"><table><thead><tr><th>Hipótesis de trabajo (todas pendientes de confirmar por el comité)</th><th>Solidez</th><th>Escenario que más la tensiona</th><th>Veredicto</th></tr></thead><tbody><tr><td>1 · El banco compite deliberadamente solo donde la complejidad paga (&quot;profundidad, no amplitud&quot;)</td><td>Alta como descripción; media como estrategia declarada</td><td>Escenario 1: si la complejidad se produce a escala, el nicho deja de ser nicho</td><td>Sostenible <strong>como hipótesis a defender con datos</strong>; ya no puede afirmarse que sea &quot;robusta a la IA&quot; sin más</td></tr><tr><td>2 · Madrid origina y mantiene la relación; la fábrica (ejecución, precios, sistemas, riesgo) está en París y otros centros</td><td>Alta en la estructura; baja en el grado</td><td>&quot;Madrid sin fábrica&quot;, en cualquier escenario</td><td>Si es cierta, la franquicia local vive de dos cosas: la interfaz con el cliente y el caso ante el grupo — y ninguna está hoy asegurada</td></tr><tr><td>3 · El banco está rotando deliberadamente hacia ingresos por comisiones recurrentes</td><td>Media: un solo año de datos no distingue una decisión estratégica del efecto mecánico de los tipos</td><td>Escenario 3, que comoditiza justo ese refugio</td><td>Si es cierta, <strong>el mapa de estabilidad que el comité tiene en la cabeza está invertido</strong>. Es la hipótesis cuya verificación más cambia el cuadro</td></tr><tr><td>4 · La apuesta de crecimiento local es la transición energética, las infraestructuras y los centros de datos</td><td>Media</td><td>La variante decepcionante: una corrección del ciclo inversor de la IA golpearía el libro y el pipeline a la vez</td><td>El mejor viento de cola del periodo — <strong>solo con un límite de exposición explícito y un estrés del libro</strong>, porque es una apuesta apalancada al mismo ciclo que motiva este informe</td></tr><tr><td>5 · En grandes patrimonios, el banco solo actúa de forma selectiva y transfronteriza, sin ambición local</td><td>Media-alta</td><td>Ninguno de forma material</td><td>La comoditización del asesoramiento golpea justo donde el banco no está: la ausencia pasa de debilidad a irrelevancia</td></tr><tr><td>6 · El banco aspira a convertir el cumplimiento y la resiliencia en argumento comercial, no solo en coste</td><td>Media-baja: no consta un solo mandato ganado o perdido por gobernanza, ni un sobreprecio observado</td><td>La variante decepcionante: un peaje que no se monetiza es solo un coste</td><td>No debería llegar al comité como tesis sin esa evidencia</td></tr></tbody></table></div>
+<h3>6.4. Las tres posturas posibles, a prueba</h3>
+<div class="table-frame" data-table-index="3"><table><thead><tr><th>Postura</th><th>Escenario 1 (aceleración)</th><th>Escenario 2 (central)</th><th>Variante decepcionante</th><th>Escenario 3 (plataformas)</th></tr></thead><tbody><tr><td><strong>A · Defender el modelo relacional experto</strong> (copilotos personales, sin rediseñar procesos ni interfaz)</td><td><strong>Castigada</strong>: el experto se queda sin producto exclusivo</td><td>Neutra-favorable: el peaje protege la relación un tiempo</td><td><strong>Favorecida</strong>: es la que menos dinero quema</td><td><strong>Castigada</strong>: la relación pierde su mecanismo — el banquero habla con un panel de control</td></tr><tr><td><strong>B · Transformación operativa selectiva y regulada</strong> (medirse primero, apostar después con condiciones, seguir al grupo con rapidez y con caso propio)</td><td>Base útil; insuficiente si el grupo va lento</td><td><strong>Favorecida</strong>: es su hábitat</td><td>Resiste: sus primeros pasos son aprendizaje barato</td><td>Resiste y además detecta: la medición es el radar de este escenario</td></tr><tr><td><strong>C · Reposicionamiento agresivo hacia datos y automatización</strong> (interfaz digital, precios en continuo, reprecificación proactiva)</td><td>Favorecida si el grupo va en cabeza</td><td>Neutra: construye para un comprador que tarda en llegar</td><td><strong>Castigada</strong>: inversión hundida sin demanda</td><td><strong>Favorecida</strong>: fija el estándar de la interfaz — con el riesgo, no resuelto, de acelerar la propia comoditización</td></tr></tbody></table></div>
+<p>Las tres posturas no son simétricas: <strong>la B contiene los primeros pasos de la A y de la C</strong>. La pregunta real del comité no es &quot;A, B o C&quot;, sino con qué condiciones se pasa de B hacia A (si el mundo se para) o hacia C (si la interfaz se mueve).</p>
+<h3>6.5. El veredicto, en una matriz</h3>
+<div class="table-frame" data-table-index="4"><table><thead><tr><th>Veredicto</th><th>Elemento</th><th>Condición</th></tr></thead><tbody><tr><td><strong>Robusto</strong></td><td>El foco mayorista especializado y el balance selectivo</td><td>En los tres escenarios, si se defiende con datos y no con inercia</td></tr><tr><td><strong>Robusto</strong></td><td>El núcleo de complejidad: financiación de proyectos, estructurada, fusiones, mercados de capitales</td><td>La máquina no firma un contrato de financiación ni negocia una compraventa; solo pierde el subsidio del flujo</td></tr><tr><td><strong>Robusto</strong></td><td>Ayvens y Genefim como negocios físicos; Altura (beneficiada por el escenario 3); Treezor como infraestructura</td><td>Mundos propios; el riesgo de Ayvens es el valor residual del eléctrico, no la IA</td></tr><tr><td><strong>Robusto</strong></td><td>La ausencia de banca privada local</td><td>La comoditización del asesoramiento golpea donde el banco no está</td></tr><tr><td><strong>Frágil</strong></td><td>Los precios heredados de lo replicable: custodia estándar, ejecución, administración</td><td>La presión de precios llega, con o sin la IA como causa</td></tr><tr><td><strong>Frágil</strong></td><td>El transaccional y el flujo &quot;recurrentes y pegajosos&quot; con empresas</td><td>Basta la versión suave del escenario 3; es el mapa de estabilidad invertido</td></tr><tr><td><strong>Frágil</strong></td><td>El modelo operativo manual: altas lentas, comités sin plazos, documentos no estructurados</td><td>En 2028 la brecha con quien rediseñó será visible en métricas comerciales</td></tr><tr><td><strong>Frágil</strong></td><td>El asesoramiento que cobra por análisis y la relación basada en saber más que el cliente</td><td>En los tres escenarios</td></tr><tr><td><strong>Frágil</strong></td><td>La escalera de talento junior-senior y la retención de las 20-30 personas clave</td><td>La fuga es silenciosa, y el foso de esta casa son personas</td></tr><tr><td><strong>Letal</strong></td><td>El pasivo corporativo a velocidad de máquina <strong>sin estrés previo ni plan de financiación</strong></td><td>Riesgo de balance, no de margen, para una sucursal sin minorista</td></tr><tr><td><strong>Letal</strong></td><td>&quot;Madrid sin fábrica&quot; consumado <strong>sin haber presentado antes el caso de España</strong></td><td>La cuenta de resultados sobrevive; la organización local, no. Y nadie lo anunciará</td></tr><tr><td><strong>Letal</strong></td><td>Mantener la postura defensiva después de que las señales del escenario 3 crucen sus umbrales</td><td>Cobertura cara + venta cruzada rota + flujo evaporado: la peor combinación posible</td></tr><tr><td><strong>Letal</strong></td><td>Bajar precios tarde y perder la interfaz a la vez</td><td>Se pierde el precio y el canal en el mismo movimiento</td></tr><tr><td><strong>Letal</strong></td><td>Exposición sin límite a centros de datos y energía + corrección del ciclo inversor de la IA</td><td>Golpearía el libro y el pipeline a la vez que se cierran las ventanas de emisión</td></tr><tr><td><strong>Oportunidad</strong></td><td>El alta de clientes rediseñada como arma comercial</td><td>Hoy, caso de negocio a construir; no inversión aprobada</td></tr><tr><td><strong>Oportunidad</strong></td><td>Financiar y dar servicio a los fondos de crédito privado</td><td>Cobrar peaje al ganador no bancario</td></tr><tr><td><strong>Oportunidad</strong></td><td>La custodia reposicionada hacia datos, colateral y agencia</td><td>Probar la disposición a pagar antes de tocar precios</td></tr><tr><td><strong>Oportunidad</strong></td><td>La banca para agentes y la certificación de agentes de cliente; la presencia negociada en las plataformas</td><td>Diseño barato hoy; construcción solo con señal</td></tr><tr><td><strong>Oportunidad</strong></td><td>Los productos estructurados personalizados a coste marginal; la entrada en cuentas cerradas cuando decide la máquina</td><td>Los dos vientos de cola menos intuitivos del análisis</td></tr><tr><td><strong>Oportunidad</strong></td><td>La tesis de balance 2028-30: las líneas firmes y el aseguramiento como producto estrella</td><td>En el escenario rápido, y con el contraargumento de demanda declarado</td></tr></tbody></table></div>
+<hr />
+</section>
+<section class="chapter" id="7-decisiones-a-considerar" data-state="decisiones" data-year="2029">
+<h2>7. Decisiones a considerar</h2>
+<p>Veintidós decisiones, numeradas para facilitar la discusión. Regla de diseño de todo el conjunto: <strong>casi todo el dinero grande está detrás de condiciones; casi toda la acción inmediata es medirse, posicionarse ante el grupo y cubrirse barato.</strong> Cada decisión indica qué la justifica, qué la activa, cuándo habría que pararla, su plazo y qué falta por validar internamente.</p>
+<div class="decision-map" aria-label="Mapa visual de decisiones">
+  <div class="decision-lane"><span class="eyebrow">Hacer ya</span><h4>No-regret</h4><p>D1-D7: medición, gobernanza, proveedores y talento.</p><ul><li>90 días</li><li>Sin trigger externo</li><li>Base de todo lo demás</li></ul></div>
+  <div class="decision-lane"><span class="eyebrow">Diseñar</span><h4>Opciones</h4><p>D8-D13: casos de negocio, protocolos y pruebas reversibles.</p><ul><li>Barato</li><li>Go/no-go claro</li><li>Aprendizaje útil</li></ul></div>
+  <div class="decision-lane"><span class="eyebrow">Esperar señal</span><h4>Apuestas</h4><p>D14-D18: inversión KYC, interfaz digital, fund finance y capital.</p><ul><li>Con umbral</li><li>Con owner</li><li>Sin storytelling</li></ul></div>
+  <div class="decision-lane"><span class="eyebrow">Proteger</span><h4>Coberturas</h4><p>D19-D22: ALCO, capex IA, incidente sectorial y AI Act.</p><ul><li>Seguro barato</li><li>Riesgo de balance</li><li>Fecha diciembre 2027</li></ul></div>
+</div>
+<h3>7.1. Con sentido en casi cualquier escenario</h3>
+<div class="table-frame" data-table-index="5"><table><thead><tr><th>Decisión</th><th>Por qué</th><th>Escenario</th><th>Qué la activa</th><th>Cuándo pararla</th><th>Plazo</th><th>Pendiente de validar</th></tr></thead><tbody><tr><td><strong>D1 · Desglosar los ingresos por su naturaleza y reconciliar la cifra país</strong></td><td>Sin saber qué parte de los 542 millones cobra por horas, balance, firma, acceso o fricción, toda la conversación sobre IA son adjetivos; y el margen del 61% está por explicar</td><td>Los tres</td><td>De inmediato</td><td>No aplica; si control de gestión no puede reconciliar en 90 días, escalarlo al grupo — ese fallo ya sería un dato</td><td>90 días</td><td>Perímetro de la cifra país; criterios de imputación de costes</td></tr><tr><td><strong>D2 · Instrumentar el negocio</strong>: tiempos de alta y de aprobación fase a fase, ratio de éxito en cotizaciones, patrones de flujo, rotación de depósitos, campos en el CRM</td><td>Media docena de señales y dos previsiones no pueden medirse sin esto; es además el radar del escenario 3</td><td>Los tres</td><td>De inmediato</td><td>No aplica; si el CRM del grupo no admite los campos en 90 días, solución local y escalar</td><td>90 días</td><td>Qué se mide ya; propiedad de los datos de cliente de España</td></tr><tr><td><strong>D3 · Levantar el mapa de funciones y contabilización Madrid-centros del grupo</strong></td><td>El vaciado no se anuncia: se mide o no se ve; y da hechos al caso-país</td><td>&quot;Madrid sin fábrica&quot;</td><td>De inmediato</td><td>No aplica</td><td>90 días; luego semestral</td><td>Organigrama funcional real; funciones ya migradas 2023-26</td></tr><tr><td><strong>D4 · Presentar el caso de España ante París</strong> (funciones, datos, presupuesto de integración, asiento en la gobernanza de IA del grupo)</td><td>Con el anuncio del programa del grupo al 70-85% antes de fin de 2027, llegar después es ejecutar lo decidido por otros</td><td>Los tres</td><td>De inmediato — la ventana no depende de este comité</td><td>Si el grupo publica el reparto antes, se pasa de proponer el diseño a renegociar el reparto</td><td>90 días el caso; 12 meses la negociación</td><td>Interlocutores en la gobernanza del grupo; precedentes de otros países</td></tr><tr><td><strong>D5 · Gobernanza local de la IA</strong>: aprobación de casos en menos de 90 días, inventario completo de usos (oficiales y no oficiales), registro de incidentes evitados</td><td>Si el comité no aprueba un caso en 90 días, el cuello de botella es interno; y el inventario es lo primero que pedirá el supervisor</td><td>Escenario 2</td><td>De inmediato</td><td>No aplica; el plazo es un techo, no una cuota</td><td>90 días</td><td>Proceso actual de aprobación; si existe inventario</td></tr><tr><td><strong>D6 · Política de proveedores de IA y nube conforme a la normativa de resiliencia, tratando también a la matriz como proveedor crítico</strong> (doble proveedor donde sea viable, prueba anual de portabilidad, cláusulas de salida y auditoría)</td><td>La dependencia decisiva de una sucursal puede ser la de su propia matriz</td><td>Escenario 2; protege en todos</td><td>De inmediato (diseño)</td><td>Si el grupo impone proveedor único, documentar el riesgo y llevarlo al caso-país</td><td>12 meses</td><td>Mapa de terceros críticos; contratos de IA vigentes</td></tr><tr><td><strong>D7 · Talento crítico</strong>: identificar a las 20-30 personas de las que depende la franquicia, plan de retención y cantera junior mínima</td><td>La defensa del margen en los tres escenarios son personas; y congelar la contratación junior sin plan crea el hueco de directores de 2030-32</td><td>Los tres</td><td>De inmediato</td><td>No aplica para la lista; el plan se recalibra cada año</td><td>90 días la lista; 12 meses el plan</td><td>Pirámide local; convenio y comités de empresa; palancas retributivas</td></tr></tbody></table></div>
+<h3>7.2. Movimientos exploratorios, pequeños y reversibles</h3>
+<div class="table-frame" data-table-index="6"><table><thead><tr><th>Decisión</th><th>Por qué</th><th>Escenario</th><th>Qué la activa</th><th>Cuándo pararla</th><th>Plazo</th><th>Pendiente de validar</th></tr></thead><tbody><tr><td><strong>D8 · Caso de negocio del rediseño del alta de clientes (no la inversión)</strong></td><td>Puede ser la mejor inversión del periodo — pero si el cuello real está en los comités de París, industrializar Madrid solo mueve la cola de sitio; primero, medir el cuello</td><td>Escenario 2</td><td>Tras D2</td><td>Si el cuello dominante está fuera del perímetro local: archivar la inversión y convertir el hallazgo en argumento del caso-país</td><td>90 días-6 meses</td><td>Tiempos actuales; mandatos perdidos por lentitud de alta</td></tr><tr><td><strong>D9 · Validar el mercado local de financiación y servicios a fondos de crédito privado</strong></td><td>Si los fondos toman el mercado mediano, financiarlos es cobrar peaje al ganador; pero el tamaño hay que medirlo en España, no con cifras globales</td><td>Escenarios 2 y 3</td><td>De inmediato (es barato)</td><td>Demanda insuficiente o precios que no cubren el capital: no seguir, y revisar en 12 meses</td><td>12 meses</td><td>Exposición y relaciones actuales con esos fondos; apetito del grupo</td></tr><tr><td><strong>D10 · Diseñar (sin construir) la oferta para agentes de cliente, y tener lista la respuesta a la primera petición de precios por API</strong></td><td>El diseño en el cajón compra un año de capacidad de reacción; y hoy la pregunta &quot;¿quién decide esa respuesta y en cuánto tiempo?&quot; no tiene respuesta</td><td>Escenario 3</td><td>El protocolo de respuesta, ya; el diseño completo, con la primera señal</td><td>Si a cierre de 2027 no hay señales: diseño al cajón, revisión semestral</td><td>12 meses</td><td>Conectividad real por API; peticiones ya recibidas</td></tr><tr><td><strong>D11 · Piloto de banquero potenciado</strong> (un sector, un equipo, métricas de negocio: mandatos y cuentas, no uso de la herramienta)</td><td>Esta casa tiene proporcionalmente más front que operaciones: potenciar al senior rinde aquí más que en un banco de trámite</td><td>Escenarios 1 y 2</td><td>Herramientas del grupo disponibles + D5</td><td>Dos trimestres sin diferencia comercial medible: parar y documentar por qué</td><td>12 meses</td><td>Herramientas ya desplegadas; disposición del equipo</td></tr><tr><td><strong>D12 · Posición proactiva ante la CNMV sobre las órdenes originadas por agentes de clientes</strong></td><td>La normativa no contempla al cliente-máquina; quien ayuda a escribir las reglas fija el estándar, quien espera lo hereda</td><td>Escenario 3</td><td>La primera consulta del supervisor o la primera petición de un cliente</td><td>Si el grupo centraliza la interlocución: aportar el caso español, no duplicar</td><td>12 meses</td><td>Relación actual con el supervisor</td></tr><tr><td><strong>D13 · Diseñar y probar con 3-5 grandes gestoras la nueva propuesta de custodia (datos + colateral + agencia) antes de tocar precios</strong></td><td>Si custodiar tiende a coste marginal, el negocio es el dato y la responsabilidad; probarlo con clientes ancla antes de que llegue la petición de oferta hostil</td><td>Escenarios 1 y 2</td><td>De inmediato (es diseño y conversación)</td><td>Si las gestoras no valoran el paquete: replantear la tesis de custodia en el comité</td><td>12 meses</td><td>Volumen, margen y clientes principales de la custodia en España</td></tr></tbody></table></div>
+<h3>7.3. Inversiones mayores, condicionadas a señales</h3>
+<div class="table-frame" data-table-index="7"><table><thead><tr><th>Decisión</th><th>Por qué</th><th>Escenario</th><th>Qué la activa</th><th>Cuándo pararla</th><th>Plazo</th><th>Pendiente de validar</th></tr></thead><tbody><tr><td><strong>D14 · La inversión de referencia en el rediseño del alta de clientes</strong></td><td>Convertir la queja universal del sector en el argumento comercial número uno del banco internacional en España: semanas donde otros tardan meses, con calidad supervisora superior</td><td>Escenario 2</td><td>Que D8 confirme el cuello en la fase local y mandatos perdidos demostrados</td><td>Deterioro de los hallazgos de auditoría; cuello desplazado al grupo; dos trimestres sin mejora tras el despliegue</td><td>Activable a 12 meses</td><td>Todo el bloque D8</td></tr><tr><td><strong>D15 · Reprecificar proactivamente la capa replicable de la custodia, empaquetada con los servicios de responsabilidad</strong></td><td>Mejor canibalizarse que ser canibalizado — pero el precio no vuelve: por eso lleva doble condición</td><td>Escenarios 1 y 2</td><td>Márgenes de los custodios globales cayendo un 8% acumulado, o la primera petición hostil, o un resultado positivo de D13</td><td>Si D1 muestra que el ingreso replicable es menor de lo supuesto, o si la consolidación del sector sostiene los precios: aplazar</td><td>12-24 meses</td><td>Tarifas actuales y cláusulas de revisión en contratos vivos</td></tr><tr><td><strong>D16 · Construir la interfaz digital: precios en continuo, API de cliente y presencia negociada en las plataformas de tesorería</strong></td><td>En el escenario 3, quien controla al agente controla el panel; y la vía son las plataformas, no cablearse uno a uno con 50 clientes. Riesgo declarado y no resuelto: puede acelerar la propia comoditización</td><td>Escenario 3 (y 1, si el grupo va en cabeza)</td><td>Peticiones estructuradas ≥15% (P5), o cinco tesorerías del IBEX operando con capa autónoma (P6), o el primer banco europeo lanzando su oferta</td><td>Cierre de 2027 sin señales: solo diseño; y si el margen capturado no cubre el coste tecnológico en cuatro trimestres: replegarse a casa de complejidad</td><td>Activable a 12-24 meses</td><td>Capacidad real de API del grupo; apetito de exponer precios</td></tr><tr><td><strong>D17 · Lanzar la franquicia de financiación y servicios a fondos de crédito privado</strong></td><td>Cobrar peaje al ganador no bancario con capacidades que la casa ya tiene</td><td>Escenarios 2 y 3</td><td>El visto bueno de D9 más la cuota no bancaria superando el 30% del mercado mediano</td><td>Un episodio de crédito en el sector; precios que no cubren el capital; apetito del grupo denegado</td><td>Activable a 12 meses</td><td>Límites de concentración con fondos</td></tr><tr><td><strong>D18 · La tesis de balance 2028-30: reclamar más capital a París</strong></td><td>Cuando el análisis es gratis, manda quien puede comprometer capital; las líneas firmes y ejecutables son lo que la máquina no replica. Contraargumento vigente: si la demanda de crédito bancario cae, el retorno puede bajar en lugar de subir</td><td>Escenario 1</td><td>La producción bancaria supervisada confirmada (P2), compresión visible de comisiones, y la evidencia de D1 de que el balance y la firma sostienen el margen</td><td>Retorno del pipeline por debajo del umbral del grupo; demanda cayendo por sustitución de los fondos</td><td>Preparar a 24 meses</td><td>Cómo se asigna realmente el balance entre países</td></tr></tbody></table></div>
+<h3>7.4. Protecciones</h3>
+<div class="table-frame" data-table-index="8"><table><thead><tr><th>Decisión</th><th>Por qué</th><th>Escenario</th><th>Qué la activa</th><th>Cuándo pararla</th><th>Plazo</th><th>Pendiente de validar</th></tr></thead><tbody><tr><td><strong>D19 · Estrés del pasivo corporativo a velocidad de máquina y plan de financiación alternativa</strong></td><td>Sucursal sin minorista, depósitos ya cayendo un 3,6%; basta la versión suave del escenario 3 para volverlos nómadas; no consta que esté modelado</td><td>Escenario 3 (versión suave)</td><td>De inmediato, como análisis</td><td>Las medidas (repreciar depósitos, colchones) solo se activan si la rotación supera el doble de la media histórica</td><td>90 días el análisis</td><td>Composición y pegajosidad real del pasivo; líneas comprometidas con el grupo</td></tr><tr><td><strong>D20 · Límite de exposición y estrés del libro de proyectos frente al ciclo inversor de la IA</strong></td><td>El pipeline se está llenando de centros de datos y energía financiados con la misma tesis que motiva este informe: correlación perfecta en el peor momento</td><td>Variante decepcionante</td><td>De inmediato: fijar el límite y correr el estrés</td><td>El límite lo fija el comité; las restricciones de originación, solo con señales de corrección del sector</td><td>12 meses</td><td>Exposición exacta al clúster; estructuras del libro</td></tr><tr><td><strong>D21 · Plan de contingencia ante el primer incidente de IA del sector: casos propios aprobados antes, y el expediente de evidencia listo para el supervisor</strong></td><td>Con un 40-60% de probabilidad de incidente sectorial antes de fin de 2028, quien llegue con los casos aprobados gana un año al que llegue tarde</td><td>Escenario 2 endurecido</td><td>De inmediato la preparación; activación plena con el incidente</td><td>No aplica: es un seguro barato. Lo que no se hace es bajar el listón de aprobación &quot;para llegar antes&quot; — sería fabricar el propio incidente</td><td>12 meses</td><td>Casos hoy en cola de aprobación</td></tr><tr><td><strong>D22 · El expediente de cumplimiento del reglamento de IA cerrado y rodado para diciembre de 2027</strong></td><td>El aplazamiento es un plazo, no una exención; llegar rodado convierte la fecha en ventaja ante clientes que auditarán a sus proveedores — y a un mayorista le cuesta menos que a un banco minorista</td><td>Escenario 2</td><td>La publicación oficial del aplazamiento (inminente) y la guía de clasificación; si la guía se retrasa, avanzar con criterio propio documentado</td><td>Un nuevo aplazamiento legislativo: recalibrar el calendario sin desmontar el trabajo</td><td>12-18 meses (hito interno: junio de 2027)</td><td>Qué casos de uso del banco caen dentro del alcance</td></tr></tbody></table></div>
+<p><strong>La priorización, en una línea.</strong> Para discutir ya: D4 (el caso-país), D1 (los ingresos y la cifra), D2 y D3 (medirse), D19 (el estrés del pasivo) y D7 (las personas clave). Para mantener abiertas: D8, D9, D10, D12 y D13. Para <strong>no</strong> tomar todavía: D14, D15, D16, D17 y D18 — las cinco grandes esperan a su señal, y hoy esperar es lo correcto.</p>
+<hr />
+</section>
+<section class="chapter" id="8-cuadro-de-senales-tempranas" data-state="senales" data-year="2029">
+<h2>8. Cuadro de señales tempranas</h2>
+<p>Veinte señales para saber hacia qué escenario se mueve el mundo. Regla de uso: cada umbral cruzado dispara una <strong>decisión ya acordada</strong>, no una reunión. Cuatro señales (S6 a S9) no pueden medirse hasta que el banco se instrumente (decisión D2): hasta entonces el cuadro está ciego en ellas, y esa ceguera debe ser visible, no invisible.</p>
+<div class="signal-board" aria-label="Mapa visual de señales tempranas">
+  <div class="signal-tile"><span class="eyebrow">S1-S2</span><strong>Producción IA</strong><p>Casos bancarios reales con métricas, ahorro, error y aprobación formal.</p></div>
+  <div class="signal-tile"><span class="eyebrow">S3-S5</span><strong>Regulación</strong><p>Guías, estándares e incidente público que estrecha la ventana de aprobación.</p></div>
+  <div class="signal-tile"><span class="eyebrow">S6-S10</span><strong>Cliente-máquina</strong><p>RFPs API, hit ratio, depósitos nómadas y tesorerías autónomas.</p></div>
+  <div class="signal-tile"><span class="eyebrow">S13-S15</span><strong>Mercado / grupo</strong><p>Custodia, crédito privado y programa IA del grupo con o sin España.</p></div>
+  <div class="signal-tile"><span class="eyebrow">S16-S20</span><strong>Riesgo estructural</strong><p>Fuga de funciones, integración, capex IA, proveedores y banca privada aumentada.</p></div>
+</div>
+<div class="table-frame" data-table-index="9"><table><thead><tr><th>#</th><th>Señal</th><th>Umbral</th><th>Fuente</th><th>Frecuencia</th><th>Decisión que activa, acelera o frena</th></tr></thead><tbody><tr><td>S1</td><td>Producción bancaria supervisada en Europa (P2)</td><td>Un banco significativo con caso documentado (ahorro ≥30%, error auditado, riesgo de modelo aprobado); dos resuelven la previsión</td><td>Memorias anuales, comunicaciones supervisoras</td><td>Trimestral</td><td>Un caso: acelera D8 y D11 · Dos: abre la puerta de D14 y D18</td></tr><tr><td>S2</td><td>El sustrato tecnológico</td><td>Agentes completando tareas de 40 horas, o coste de uso cayendo más de 5 veces al año (escenario rápido); dos trimestres sin avance más retornos negativos en programas de bancos comparables (variante decepcionante)</td><td>Evaluadores públicos de capacidades; resultados de otros bancos</td><td>Trimestral</td><td>Recalibra las previsiones; la variante decepcionante frena todas las inversiones mayores</td></tr><tr><td>S3</td><td>La guía europea de clasificación y los estándares (P4)</td><td>Publicación antes de junio de 2027</td><td>Diario Oficial de la UE, Comisión</td><td>Continua</td><td>Activa el cierre de expedientes (D22); su ausencia obliga a avanzar con criterio propio</td></tr><tr><td>S4</td><td>La primera guía del BCE/EBA sobre IA generativa en riesgo de modelo</td><td>Publicación</td><td>Fuentes oficiales</td><td>Trimestral</td><td>Condiciona el diseño de D5, D14 y D22</td></tr><tr><td>S5</td><td>El primer incidente o sanción por IA en un banco europeo (P9)</td><td>Primera actuación supervisora pública señalando la IA como causa material</td><td>Registros supervisores, prensa con confirmación oficial</td><td>Continua</td><td>Activa D21 en pleno: 90 días para aprobar los casos propios pendientes; congela anuncios</td></tr><tr><td>S6</td><td>Peticiones de oferta estructuradas de los 50 mayores clientes (P5)</td><td>15% o más en formato estructurado o exigiendo API</td><td>CRM instrumentado (requiere D2)</td><td>Trimestral</td><td>Abre la puerta de D16</td></tr><tr><td>S7</td><td>La primera petición de precios en continuo por API</td><td>Una petición formal</td><td>Registro comercial (D2)</td><td>Continua</td><td>Dispara el protocolo de respuesta (D10) y la posición ante el supervisor (D12)</td></tr><tr><td>S8</td><td>El ratio de éxito en divisas con patrones de máquina</td><td>Caída de más del 20% con horarios atípicos en tres o más cuentas grandes</td><td>Panel de las mesas (D2)</td><td>Mensual</td><td>Abre la puerta de D16; refuerza D19; desaconseja la postura puramente relacional</td></tr><tr><td>S9</td><td>La rotación de los depósitos corporativos</td><td>Más del doble de la media 2019-2024</td><td>Comité de activos y pasivos; agregados del Banco de España</td><td>Mensual</td><td>Activa las medidas del plan de financiación (D19)</td></tr><tr><td>S10</td><td>Ejecución autónoma en los grandes sistemas de tesorería / primer IBEX con tesorería autónoma</td><td>Lanzamiento comercial de ejecución autónoma (no copiloto); o el primer IBEX publicando ahorros</td><td>Notas de producto, prensa especializada, resultados de las empresas</td><td>Trimestral</td><td>Acelera D10 hacia D16; sube el peso de la variante extrema del escenario 3</td></tr><tr><td>S11</td><td>El primer banco europeo con oferta para agentes de cliente</td><td>Un banco relevante</td><td>Prensa, producto</td><td>Trimestral</td><td>Fuerza la decisión explícita de ir primero o seguir, en D16</td></tr><tr><td>S12</td><td>Un banco doméstico anuncia un agente en un proceso central</td><td>Uno de los cinco grandes, en producción y con métricas (no adjetivos)</td><td>Resultados de las entidades</td><td>Trimestral</td><td>Revisa el posicionamiento del nicho; acelera D8 y D11</td></tr><tr><td>S13</td><td>El entorno de precios de la custodia</td><td>Márgenes de los custodios globales cayendo un 8% acumulado desde 2024</td><td>Informes de BNY y State Street</td><td>Trimestral</td><td>Abre la puerta de D15, junto con el resultado de D13</td></tr><tr><td>S14</td><td>El crédito privado en España (P7)</td><td>Cuota no bancaria superior al 30% en operaciones medianas, o crecimiento acumulado del 40% desde 2024</td><td>Series ibéricas del sector</td><td>Semestral</td><td>Abre la puerta de D17 (si D9 dio el visto bueno)</td></tr><tr><td>S15</td><td>El programa de IA del grupo (P10)</td><td>El anuncio con objetivo cuantificado; y si menciona o no a España en el reparto</td><td>Comunicación oficial del grupo</td><td>Continua</td><td>Fija el reloj de D4; un anuncio sin España escala el caso-país a renegociación</td></tr><tr><td>S16</td><td>Las funciones Madrid-centros del grupo y la fuga de personas clave</td><td>Migración neta sostenida dos semestres (umbral a fijar con la línea base de D3); dos o más salidas al año de la lista de 20-30</td><td>Mapa interno (D3); recursos humanos</td><td>Semestral / trimestral</td><td>Endurece el caso-país; activa la retención de D7</td></tr><tr><td>S17</td><td>La cola de integración interna</td><td>Casos aprobados esperando sistemas del grupo más de dos trimestres</td><td>Informe interno (D5)</td><td>Trimestral</td><td>Dispara la renegociación con la matriz y reabre la pregunta de cuánta autonomía local hace falta</td></tr><tr><td>S18</td><td>Una corrección del ciclo inversor de la IA</td><td>Dos o más grandes proyectos de centros de datos cancelados, o repreciación de más de 100 puntos básicos en su financiación</td><td>Prensa financiera; el propio pipeline</td><td>Trimestral</td><td>Activa las restricciones de D20; frena D18</td></tr><tr><td>S19</td><td>La concentración de proveedores tecnológicos</td><td>Nueva designación oficial de un proveedor crítico usado por el grupo; o subida de precios de un modelo de IA de más del doble</td><td>Registros oficiales; precios públicos</td><td>Trimestral</td><td>Activa las pruebas de portabilidad y las cláusulas de D6</td></tr><tr><td>S20</td><td>El asesoramiento aumentado masivo en la banca privada doméstica</td><td>Dos o más de los cinco grandes con oferta generalizada</td><td>Prensa, presentaciones de las entidades</td><td>Semestral</td><td>Confirma que la banca privada local sigue fuera del plan, salvo la vía transfronteriza</td></tr></tbody></table></div>
+<hr />
+</section>
+<section class="chapter" id="9-preguntas-para-el-comite" data-state="preguntas" data-year="2030">
+<h2>9. Preguntas para el comité</h2>
+<p>Catorce preguntas. Las diez primeras son de decisión: nadie puede responderlas por ustedes. Las cuatro últimas son de autoconocimiento: deberían poder responderse hoy mismo, y sospechamos que no se puede.</p>
+<ol><li><strong>El mandato.</strong> ¿Qué optimiza España: el beneficio del país o la capacidad organizativa local? Si las dos cosas divergen —y en el eje &quot;Madrid sin fábrica&quot; divergen—, ¿cuál gana?</li><li><strong>La postura ante el grupo.</strong> ¿Seguimos con rapidez lo que construya el grupo, o construimos selectivamente en local? ¿Y qué señal —por ejemplo, casos aprobados esperando sistemas más de dos trimestres— cambiaría la respuesta?</li><li><strong>El supuesto de precios.</strong> Hasta que haya datos propios: ¿asumimos que el ahorro de la IA se cederá mayoritariamente al cliente vía precio (prudente en ingresos, agresivo en reprecificar) o que se retendrá en parte (lo contrario)? Es una decisión de apetito, no de análisis.</li><li><strong>La canibalización.</strong> ¿Estamos dispuestos a bajar el precio de lo replicable antes de que lo haga el mercado, sabiendo que el precio no vuelve?</li><li><strong>El apetito del ciclo.</strong> ¿Qué límite de exposición aceptamos a centros de datos y energía ligados al ciclo inversor de la IA, y qué señal lo revisa?</li><li><strong>El compromiso público.</strong> ¿Qué cifra de tiempo de alta de cliente estamos dispuestos a comprometer para 2028, una vez medida la línea base? Si ninguna, ¿qué dice eso de nuestra transformación?</li><li><strong>El dueño.</strong> ¿Quién es el responsable único de este conjunto de decisiones, condiciones y señales, con autoridad de presupuesto — y ante quién responde?</li><li><strong>El perímetro.</strong> ¿Qué tratamos como fijo hasta 2030 —Ayvens, la custodia, Treezor, Altura, Genefim— y qué como contingente, sabiendo que el grupo lleva tres años vendiendo lo que no es prioritario?</li><li><strong>Las plataformas.</strong> Ante los sistemas de tesorería y las plataformas multibanco: ¿dentro pagando por posicionamiento, fuera defendiendo canal propio, o co-definiendo sus reglas — y quién lo negocia?</li><li><strong>La cantera.</strong> ¿Cuál es la contratación junior mínima que mantenemos aunque la máquina la haga parecer innecesaria, para tener directores en 2031?</li><li>¿Qué parte de nuestros 542 millones de ingresos cobra por horas de experto, por balance, por firma, por acceso o por la fricción que el cliente no puede evitar? Si nadie en la mesa lo sabe, esa es la primera decisión.</li><li>¿Cuántos mandatos perdimos en 2024 y 2025, y por qué causa registrada? ¿Existe siquiera ese registro?</li><li>Si un IBEX-35 nos pide mañana precios en continuo por API para su agente de tesorería, ¿quién decide la respuesta y en cuánto tiempo?</li><li>¿Puede nuestro comité de riesgos aprobar hoy un caso de uso de IA en menos de 90 días? Si no: ¿el cuello de botella es el supervisor, o somos nosotros?</li></ol>
+<hr />
+</section>
+<section class="chapter" id="10-los-proximos-90-dias" data-state="noventa" data-year="2030">
+<h2>10. Los próximos 90 días</h2>
+<p><strong>Qué validar internamente</strong>, por orden de bloqueo: (1) el desglose de los ingresos por naturaleza y por línea; (2) la reconciliación de la cifra país — el margen del 61% necesita explicación; (3) el mapa de funciones y contabilización Madrid-centros del grupo; (4) el ciclo comercial medido fase a fase, con responsable por etapa — para saber si el cuello está en Madrid o en París; (5) los datos propios de flujo y de pasivo. Una sesión de trabajo de dos a tres horas con dirección general, financiera y de riesgos cubre el cuestionario completo. Y si las dos primeras piezas no llegan en semanas, el análisis con cifras saldrá igualmente con rangos condicionados — y así se dirá.</p>
+<p><strong>Qué decisiones discutir:</strong> las cinco de la lista corta — el caso de España ante París (D4, la única con la ventana en manos de otros), el paquete de medición (D1 a D3), el estrés del pasivo (D19) y las personas clave (D7). Junto a las tres preguntas de apetito que desbloquean todo lo demás: el mandato, la postura ante el grupo y el supuesto de precios.</p>
+<p><strong>Qué señales empezar a medir ya:</strong> las quince que dependen de fuentes públicas arrancan desde el primer día; las cuatro que dependen de datos propios (S6 a S9) esperan a la instrumentación — y esa espera debe verse en el cuadro, no esconderse.</p>
+<p><strong>Qué análisis y pilotos abrir:</strong> el caso de negocio del alta de clientes con el cuello medido (D8); la validación del mercado español de financiación a fondos (D9); el protocolo de respuesta a la primera petición por API (la parte barata de D10); la prueba de la nueva propuesta de custodia con tres a cinco gestoras (D13); y el estrés del libro de proyectos con propuesta de límite (D20).</p>
+<p><strong>Qué no hacer todavía:</strong> aprobar la inversión del alta de clientes (D14); tocar las tarifas de custodia (D15); construir la interfaz digital (D16); lanzar la franquicia de financiación a fondos (D17); pedir más capital a París sin la evidencia (D18); anunciar recomposiciones de plantilla; y publicar cualquier cifra de &quot;ingresos en riesgo&quot; antes de reconciliar el denominador.</p>
+<hr />
+</section>
+<section class="chapter" id="11-que-sabemos-que-interpretamos-que-suponemos-y-que-falta" data-state="limites" data-year="2030">
+<h2>11. Qué sabemos, qué interpretamos, qué suponemos y qué falta</h2>
+<div class="evidence-board" aria-label="Mapa de evidencia y límites">
+  <div class="evidence-card"><span class="eyebrow">Confirmado</span><strong>Base pública.</strong><p>Perímetro, cifras, mercado, calendario regulatorio y capacidades observables.</p></div>
+  <div class="evidence-card"><span class="eyebrow">Interpretado</span><strong>Modelo económico.</strong><p>Tres motores, dependencias, mecanismos de escenarios y captura económica.</p></div>
+  <div class="evidence-card"><span class="eyebrow">Hipótesis</span><strong>Validación interna.</strong><p>Cuellos, estrategia real, mapa de funciones y pass-through del ahorro.</p></div>
+  <div class="evidence-card"><span class="eyebrow">Falta</span><strong>Lo que bloquea cifras.</strong><p>NBI por naturaleza, costes, flujo, pasivo, personas clave y cuotas reales.</p></div>
+</div>
+<p><strong>Lo confirmado por fuentes públicas.</strong> El perímetro y la forma jurídica del banco en España; las cifras publicadas de 2024-2025 (país, sucursal, Ayvens, Genefim, grupo); la estructura del mercado español y sus clasificaciones; el calendario del reglamento europeo de IA tras su modificación; y la serie empírica de capacidades de los agentes de IA.</p>
+<p><strong>Lo que es interpretación nuestra, razonada pero no confirmada.</strong> El modelo económico de tres motores y las cinco dependencias estructurales; la traducción de la estrategia del grupo a España; la cadena que va de la capacidad tecnológica a la captura económica; los mecanismos de los tres escenarios; que el ahorro operativo se produce mayoritariamente fuera de España; y que un mayorista sin minorista tiene menos exposición directa a las obligaciones más duras del reglamento.</p>
+<p><strong>Lo que son hipótesis de trabajo, pendientes de que este comité las confirme o corrija.</strong> Las seis hipótesis de la sección 6 al completo; la localización de los cuellos de botella operativos; que el perímetro societario se mantiene hasta 2030 (un grupo que lleva tres años desinvirtiendo no lo garantiza); que hoy no se miden el flujo, los ciclos ni las causas de pérdida de mandatos — si se miden, mejor: todo se acelera; y el supuesto de traslado del ahorro al precio que el comité elija.</p>
+<p><strong>Lo que falta.</strong> El desglose de los ingresos por naturaleza; la cifra país reconciliada; el reparto interno de costes y el mapa de funciones; el cuello real del ciclo comercial; los datos de flujo y pasivo; las prioridades y objetivos reales de España para 2026-2030; el apetito de riesgo efectivo; el inventario de usos de IA; las personas clave; las cuotas reales por producto; la sensibilidad de Ayvens al valor residual del eléctrico; y el papel exacto de Treezor y Altura en el perímetro español.</p>
+<p><strong>Lo que sería peligroso presentar como conclusión definitiva.</strong></p>
+<ol><li><em>&quot;La estrategia de Société Générale España es robusta frente a la IA.&quot;</em> Esa frase se formuló durante el análisis y <strong>se descartó</strong>: se apoyaba en un abanico incompleto de futuros y convertía un ejercicio de anticipación en un certificado de continuidad. Solo cabe la versión incómoda: la posición puede resistir <strong>si</strong> el banco controla tres cosas — la relación con el cliente sofisticado, el reparto de capacidades con la matriz y la captura local de la productividad. Hoy ninguna de las tres está asegurada, y ninguna está medida.</li><li>Cualquier cifra de impacto económico calculada sobre la cifra país sin reconciliar, o cualquier ahorro de horas convertido en euros sin la cadena completa de captura.</li><li><em>&quot;El cuello de botella está en el alta de clientes&quot;</em> — y, en general, cualquier inversión &quot;evidente&quot; antes de haber medido dónde está el cuello de verdad.</li><li>La interfaz digital como camino claro: puede ser tanto la defensa como el acelerador de la propia comoditización; por eso está detrás de señales, no delante.</li><li>Cualquier automatismo que convierta un avance técnico en despliegue en producción, y cualquier recorte de plantilla presentado como consecuencia inevitable de la tecnología.</li></ol>
+<hr />
+<p class="signature"><em>Informe elaborado por Néstor Guerra · NCompany · Julio 2026. Documento vivo: revisión trimestral y con cada señal del cuadro que cruce su umbral.</em></p>
+</section>
+    </main>
+
+    <aside class="right-rail" aria-label="Columna derecha dinámica">
+      <div class="right-summary">
+        <div class="panel-label">Panel de comité</div>
+        <h2 id="rightTitle">Decidir primero</h2>
+        <p id="rightText">Decisiones, red flags e indicadores cambian con el scroll.</p>
+        <div class="year-controls" aria-label="Año activo">
+          <button type="button" data-year-button="2026">2026</button><button type="button" data-year-button="2027">2027</button><button type="button" data-year-button="2028">2028</button><button type="button" data-year-button="2029">2029</button><button type="button" data-year-button="2030">2030</button>
+        </div>
+        <div id="rightYear"></div>
+      </div>
+      <div class="panel-box">
+        <div class="panel-label">Decisiones / gatillos</div>
+        <div id="rightActions"></div>
+      </div>
+      <div class="panel-box">
+        <div class="panel-label">Red flags</div>
+        <div class="red-list" id="redFlags"></div>
+      </div>
+    </aside>
+
+    <footer class="footer">
+      Elaborado por Néstor Guerra · NCompany · Julio 2026. Fuente: Informe B. Referencia visual consultada: ai-2027.com. Documento vivo: revisar trimestralmente y cada vez que una señal cruce umbral.
+    </footer>
+  </div>
+  <script>
+const panelData = {"resumen":{"label":"Resumen ejecutivo","leftTitle":"Las tres tesis","leftRows":[["1","Difusión gobernada, con peaje","El permiso y la captura pesan más que el hype técnico."],["2","Tres desplazamientos silenciosos","Interfaz CFO, funciones hacia hubs y ahorro cedido al precio."],["3","Medirse a uno mismo","Sin NBI por naturaleza y mapa Madrid-hubs no hay inversión defendible."]],"rightTitle":"Decidir primero","rightRows":[["D4","Caso de España ante París","Antes del programa IA del grupo."],["D1-D3","Desglose, instrumentación, mapa funcional","90 días."],["D19","Estrés del pasivo corporativo","Análisis ya."],["D7","Talento crítico","Lista 20-30 personas."]],"redFlags":["Bajar precios tarde","Llegar tarde al reparto del grupo","No modelar depósitos a velocidad de máquina"]},"partida":{"label":"Punto de partida","leftTitle":"Modelo observable","leftRows":[["CIB / Markets","Complejidad + balance + firma","Resiste si no cobra por horas replicables."],["GTB / SGSS","Servicios recurrentes","Puede ser el mapa de estabilidad invertido."],["Ayvens / Genefim","Activos físicos","Riesgo más de ciclo/EV que de IA pura."],["Altura / Treezor","Infraestructura","Opciones si sube volumen o pagos embebidos."]],"rightTitle":"Huecos que bloquean","rightRows":[["NBI","542 M€ sin desglose por naturaleza","Horas, balance, firma, acceso, fricción."],["Perímetro","BAI/NBI 61% anómalo","Reconciliar país y costes."],["Funciones","Madrid vs centros del grupo","Medir migración neta."],["Clientes","Flow, depósitos, hit ratio","Instrumentar CRM y mesas."]],"redFlags":["Asumir robustez sin datos","No saber qué margen es replicable","No ver funciones migrando fuera"]},"tecnologia":{"label":"Tecnología","leftTitle":"Siete puertas","leftRows":[["1","Capacidad técnica","Alta y acelerando."],["2","Coste de uso","Baja, pero no decide solo."],["3","Fiabilidad certificable","Clave para banca regulada."],["4","Integración","Sistemas y datos del grupo."],["5-7","Permiso, adopción, captura","La parte que convierte demo en margen."]],"rightTitle":"Indicadores a medir","rightRows":[["Capacidad","Tareas de 40 horas completadas","AI Futures / evaluadores."],["Producción","Agentes con error auditado","Memorias y supervisores."],["Permiso","Guías BCE/EBA y clasificación IA","Fuentes oficiales."],["Captura","Ahorro bruto -> precio -> margen local","Control de gestión."]],"redFlags":["Convertir horas ahorradas en euros sin cadena","Confundir copiloto con producción","Presupuestar autonomía sin humano"]},"forecasts":{"label":"Forecasts","leftTitle":"Previsiones críticas","leftRows":[["P2","Agentes bancarios supervisados","15-30% antes de fin de 2028."],["P3","Crédito/advisory sin humano significativo","5-10%, restricción fuerte."],["P6","Tesorerías IBEX con capa autónoma","30-50% antes de 2029."],["P10a","Programa IA del grupo","70-85% antes de fin de 2027."],["P10b","Mención o no a España","La previsión que decide."]],"rightTitle":"Qué cambia una decisión","rightRows":[["P2 cruza","De pilotos a producción supervisada","D14/D18 se vuelven discutibles."],["P3 no cruza","Humano permanente","Presupuestar supervisión estructural."],["P5/P6 cruza","Interfaz digital/API","D10 pasa hacia D16."],["P9 cruza","Incidente sectorial","D21 y pausa de comunicación."]],"redFlags":["Probabilidades con falsa precisión","No tener fuentes para S6-S9","Mirar P10a y olvidar P10b"]},"escenarios":{"label":"Escenarios","leftTitle":"Tres mundos","leftRows":[["E1","La fábrica cognitiva","Aceleración: hubs automatizan y precio baja."],["E2","Difusión con peaje","Central: eficiencia supervisada y compliance como foso."],["E3","La plataforma se queda con el cliente","Discontinuidad: el CFO decide desde TMS/ERP."]],"rightTitle":"Impactos principales","rightRows":[["Negocio","Más volumen, precio unitario menor","Defender firma, balance, responsabilidad."],["Operaciones","Front potenciado; middle office adelgaza","No perder contenido local."],["Cliente","Más comparación, más API, menos fricción","La interfaz se vuelve estratégica."],["Grupo","Madrid compite por capacidades","Caso-país antes del reparto."]],"redFlags":["Madrid sin fábrica","Cobertura comercial cara sin interfaz","Ahorro capturado fuera de España"]},"resistencia":{"label":"Túnel de viento","leftTitle":"Matriz de resistencia","leftRows":[["Robusto","Mayorista especializado, complejidad, balance","Si se defiende con datos."],["Frágil","Flow, custodia estándar, modelo manual","Precio y velocidad bajo presión."],["Letal","Pasivo nómada, Madrid sin fábrica","Riesgo de balance y organización."],["Oportunidad","KYC, custodia-datos, fondos, agentes","Diseñar hoy; construir con señal."]],"rightTitle":"Hipótesis a confirmar","rightRows":[["H1","Profundidad, no amplitud","Confirmar si es estrategia real."],["H2","Madrid origina; París fabrica","Medir grado, no asumirlo."],["H3","Rotación a comisiones recurrentes","Puede estar invertida."],["H6","Compliance como argumento comercial","No vender sin evidencia."]],"redFlags":["Certificar robustez","No fijar límite a data centers/energía","Confundir resistencia con inmovilidad"]},"decisiones":{"label":"Decisiones","leftTitle":"Cartera D1-D22","leftRows":[["No-regret","D1-D7","Medir, gobernar, proveedores, talento."],["Opciones","D8-D13","Diseño barato y reversible."],["Apuestas","D14-D18","Solo con triggers."],["Protecciones","D19-D22","ALCO, capex IA, incidente sectorial, AI Act."]],"rightTitle":"Regla de inversión","rightRows":[["Ahora","D1-D4, D7, D19","Arrancar sin esperar."],["Diseñar","D8-D13","Tener respuesta en el cajón."],["No aprobar aún","D14-D18","Necesitan señal cuantificada."],["Preparar seguro","D20-D22","Barato frente a llegar tarde."]],"redFlags":["Comprar tecnología antes de medir","Activar APIs sin demanda","Pedir capital sin evidencia de retorno"]},"senales":{"label":"Señales","leftTitle":"20 indicadores","leftRows":[["Tecnología","S1-S2, S12","Producción y capacidades con métricas."],["Regulación","S3-S5","Guías, estándares, incidente público."],["Cliente/flow","S6-S11","RFP API, hit ratio, depósitos, TMS."],["Grupo/mercado","S13-S20","Custodia, crédito privado, SG, talento, capex."]],"rightTitle":"Uso del dashboard","rightRows":[["Cada señal","Owner + fuente + frecuencia","Si no activa nada, no es señal."],["S6-S9","Requieren D2","Ceguera visible hasta instrumentar."],["S15","Programa IA del grupo","Fija reloj del caso-país."],["S5","Incidente sectorial","Activa contingencia y pausa."]],"redFlags":["Dashboard decorativo","Señales sin umbral","No distinguir fuente pública de dato interno"]},"preguntas":{"label":"Preguntas","leftTitle":"Comité","leftRows":[["Mandato","BAI país vs capacidad local","Decisión política interna."],["Grupo","Seguir o construir local","Señal para cambiar postura."],["Precio","Pass-through del ahorro","Apetito antes de datos."],["Cantera","Juniors mínimos","Directores 2031."]],"rightTitle":"Autoconocimiento","rightRows":[["Ingresos","Horas / balance / firma / acceso / fricción","Primera pregunta de verdad."],["Mandatos perdidos","2024-2025 con causa registrada","¿Existe el registro?"],["API IBEX","Quién responde y cuándo","Tiempo de decisión real."],["Riesgo IA","Caso aprobado <90 días","Cuello interno o supervisor."]],"redFlags":["Que nadie sea owner","Responder preguntas con generalidades","No fijar apetito de canibalización"]},"noventa":{"label":"90 días","leftTitle":"Plan inmediato","leftRows":[["Validar","NBI, cifra país, funciones, ciclo, flow/pasivo","Orden de bloqueo."],["Discutir","D4, D1-D3, D19, D7","Lista corta."],["Medir","15 señales públicas + 4 internas tras D2","Tablero vivo."],["Abrir","D8-D10, D13, D20","Análisis y pilotos baratos."]],"rightTitle":"No hacer todavía","rightRows":[["No","D14 inversión KYC","Antes medir cuello."],["No","D15 reprecificar SGSS","Antes validar disposición a pagar."],["No","D16 construir interfaz digital","Antes P5/P6/S7/S8."],["No","NBI en riesgo público","Antes reconciliar denominador."]],"redFlags":["Plan sin owner","Pilotos sin métrica de negocio","Anunciar cifras antes de tener denominador"]},"limites":{"label":"Límites","leftTitle":"Evidencia","leftRows":[["Confirmado","Perímetro, cifras públicas, mercado, calendario","Usable como base."],["Interpretado","Modelo económico, captura, mecanismos","Razonado pero no interno."],["Hipótesis","Seis hipótesis y cuellos","Comité debe confirmar/corregir."],["Falta","NBI, costes, funciones, flujo, pasivo, personas","Bloquea cuantificación seria."]],"rightTitle":"Frases prohibidas","rightRows":[["No decir","La estrategia es robusta frente a IA","Solo posición observable condicional."],["No convertir","Horas ahorradas en euros","Sin cadena de captura."],["No asumir","El cuello está en alta/KYC","Medir antes."],["No automatizar","Avance técnico -> producción","Regulación y riesgo primero."]],"redFlags":["Vender certeza donde hay huecos","Esconder limitaciones","Convertir hipótesis en recomendación cerrada"]}};
+const scenarioByYear = {"2026":[["Fábrica cognitiva","Copilotos y pilotos documentales; rotación a comisiones ya en marcha por tipos.","Arrancar D1-D5, D7, D19."],["Difusión con peaje","Agentes en piloto perpetuo; obligaciones duras aplazadas a dic-2027.","Preparar cumplimiento como ventaja."],["Plataforma CFO","Copilotos en TMS, APIs de tesorería estándar; autonomía aún incipiente.","Diseñar protocolo D10."]],"2027":[["Fábrica cognitiva","Hubs del grupo despliegan documentación supervisada; respuesta baja de semanas a días.","Caso-país antes de reparto."],["Difusión con peaje","Producción supervisada de bajo riesgo; posible programa IA del grupo.","D4, D22, D5."],["Plataforma CFO","Primeras tesorerías IBEX pilotan optimización continua.","Medir RFPs/API/hit ratio."]],"2028":[["Fábrica cognitiva","Compresión de comisiones; posible incidente sectorial que castiga al que iba tarde.","D21 y gates D14/D18."],["Difusión con peaje","Brecha visible entre rediseñadores y añadidores.","Decidir KYC solo si D8 confirma cuello."],["Plataforma CFO","Pricing, depósitos y coberturas estándar pasan por paneles.","D16 solo con señales."]],"2029":[["Fábrica cognitiva","Valor migra a capital, datos de flujo y confianza.","Reclamar capital solo con evidencia."],["Difusión con peaje","Hacer baja de precio; responder de sube de valor.","Repricing condicionado."],["Plataforma CFO","Dos modelos: utility de plataforma o casa de complejidad.","Elegir postura frente a TMS/plataformas."]],"2030":[["Fábrica cognitiva","Menos personas, más volumen intermediado si se juega bien; distribuidora si no.","Revisar rol local."],["Difusión con peaje","El supervisor exige capacidades de IA como estándar.","Gobierno y evidencia continuos."],["Plataforma CFO","Mercado en dos capas: subasta continua y confianza irreducible.","Defender firma/balance/interfaz."]]};
+const yearFocus = {"2026":[["Foco","Instrumentación y mandato","Sin medición no hay comité defendible."],["Decisiones","D1-D5, D7, D19","Arrancar ya."],["Red flags","No tener inventario IA; no saber NBI por naturaleza","Corregir en 90 días."],["Indicadores","Baseline de onboarding, crédito, hit ratio, depósitos","Crear línea base."]],"2027":[["Foco","Programa IA del grupo y AI Act","Ventana del caso-país."],["Decisiones","D4, D5, D10, D22","Preparar expedientes y respuesta API."],["Red flags","España no aparece en reparto; casos aprobados esperando sistemas","Escalar a grupo."],["Indicadores","P4, P5, P10a/P10b, S15, S17","Seguimiento continuo."]],"2028":[["Foco","Brecha de producción supervisada","Rediseñar vs añadir herramientas."],["Decisiones","D8->D14 si cuello confirmado; D21","Apuesta solo con pruebas."],["Red flags","Incidente IA sectorial; retornos negativos comparables","Pausar o endurecer."],["Indicadores","P2, P3, P9, S1, S5, S12","Trimestral."]],"2029":[["Foco","Plataformas, crédito privado, pass-through","Captura económica real."],["Decisiones","D16, D17, D18 condicionadas","Activar solo con umbral."],["Red flags","Hit ratio FX cae; depósitos rotan; capex IA se repricia","D19/D20."],["Indicadores","P6, P7, S8-S10, S14, S18","Mensual/trimestral."]],"2030":[["Foco","Posición final de SG España","Casa de complejidad, utility o distribuidora."],["Decisiones","Perímetro, talento, capital, interfaz","Actualizar cartera."],["Red flags","Coverage caro + venta cruzada rota + flow evaporado","Cambiar postura."],["Indicadores","P1, P8, P11, P12, S16, S20","Revisión estratégica."]]};
+const scenarioExplorerData = {
+  factory: {
+    code: 'E1',
+    title: 'La fábrica cognitiva',
+    weight: 'relevante',
+    axis: 'Aceleración fuerte',
+    thesis: 'El coste del trabajo intelectual estructurado se desploma entre 2027 y 2029; la ventaja en banca mayorista deja de ser "tener expertos" y pasa a ser "tener capital, datos, distribución y licencia para operar máquinas expertas".',
+    body: 'Volumen al alza, ingreso unitario a la baja. Las comisiones por "hacer" caen; las comisiones por "responder de" resisten, porque venden responsabilidad, no horas.',
+    details: [
+      ['Mecanismo', 'Agentes fiables pronto -> hubs del grupo automatizan documentación y análisis -> el ahorro se convierte en munición de precios global.'],
+      ['Impacto operativo', 'El banquero de cobertura pasa de coordinar especialistas a dirigir agentes; el cambio ocurre sobre todo en operaciones intermedias fuera de España.'],
+      ['Avisos tempranos', 'P2, caída de ofertas junior, compresión de comisiones de sindicados y anuncio del programa IA del grupo.']
+    ],
+    timeline: [
+      ['2026', 'Copilotos por todas partes; agentes de operaciones en piloto.'],
+      ['2027', 'Hubs del grupo despliegan agentes de documentación con supervisión por excepción.'],
+      ['2028', 'Compresión visible de comisiones y posible primer incidente grave del sector.'],
+      ['2029', 'El valor migra a capital, datos propios de flujo y relación de confianza.'],
+      ['2030', 'Bien jugado: menos personas, más volumen intermediado; mal jugado: distribuidora de lo que fabrican otros.']
+    ]
+  },
+  peaje: {
+    code: 'E2',
+    title: 'Difusión con peaje',
+    weight: 'central',
+    axis: 'Eficiencia supervisada',
+    thesis: 'La capacidad avanza más deprisa que el permiso. La IA entra en la banca europea de dentro afuera —eficiencia antes que producto, supervisada antes que autónoma—.',
+    body: 'El retorno es real pero desigual, y gana quien convierte el peaje regulatorio en ventaja mientras los actores no bancarios toman lo que la regulación deja fuera.',
+    details: [
+      ['Mecanismo', 'Capacidad en exponencial; adopción bancaria por escalones de seis a dieciocho meses: caso de uso, comité, piloto, validación, producción supervisada.'],
+      ['Impacto operativo', 'Front office potenciado, no sustituido; la métrica nueva es mandatos por senior, no personas.'],
+      ['Avisos tempranos', 'Guía europea de clasificación, BCE/EBA, alta de clientes en menos de 15 días, cláusulas de IA en RFPs y casos internos esperando sistemas.']
+    ],
+    timeline: [
+      ['2026', 'Copilotos por todas partes, agentes en piloto perpetuo y obligaciones duras aplazadas a diciembre de 2027.'],
+      ['2027', 'Producción supervisada en bajo riesgo: desarrollo, documentación interna, KYC e informes.'],
+      ['2028', 'La brecha entre rediseñadores y añadidores se ve en tiempo de alta, crédito y coste por operación.'],
+      ['2029', 'El coste de "hacer" cae; el precio de "responder de" sube.'],
+      ['2030', 'El supervisor ya exige capacidades de IA; SG España puede defender alta rápida, custodia-datos y seniority potenciado.']
+    ]
+  },
+  platform: {
+    code: 'E3',
+    title: 'La plataforma se queda con el cliente',
+    weight: 'discontinuidad',
+    axis: 'Cliente-máquina',
+    thesis: 'La relación con el director financiero la capturan capas tecnológicas —sistemas de tesorería, ERP, plataformas multibanco— potenciadas con IA.',
+    body: 'El banco conserva el producto y el balance, pero pierde la interfaz, los datos y el poder de fijar precios; la venta cruzada se erosiona sin que ningún cliente "se vaya".',
+    details: [
+      ['Mecanismo', 'La capa del cliente compara en continuo divisas, depósitos, circulante y coberturas contra todo el panel bancario y ejecuta salvo veto.'],
+      ['Impacto operativo', 'Cobertura comercial reducida y elevada: sobrevive quien diseña con el CFO las reglas que gobiernan su capa tecnológica.'],
+      ['Avisos tempranos', 'RFPs con integración API, hit ratio FX cayendo, depósitos con rotación anómala y tesorerías IBEX con ejecución autónoma.']
+    ],
+    timeline: [
+      ['2026', 'Copilotos en TMS; flujo de divisas ya se subasta en parte; APIs de tesorería estándar.'],
+      ['2027', 'Dos o tres tesorerías IBEX pilotan optimización continua y aparecen RFPs con integración de agentes.'],
+      ['2028', 'El patrón se extiende al depósito, papel comercial y coberturas estándar.'],
+      ['2029', 'Dos modelos viables: proveedor de volumen para la plataforma o casa de complejidad con capital y firma.'],
+      ['2030', 'Mercado en dos capas: subasta continua de productos estándar y mercado de confianza para lo irreducible.']
+    ]
+  }
+};
+const years = ['2026','2027','2028','2029','2030'];
+let activeState = 'resumen';
+let activeYear = '2026';
+let manualYearUntil = 0;
+const sections = Array.from(document.querySelectorAll('[data-state]'));
+const navLinks = Array.from(document.querySelectorAll('.section-nav a'));
+const progressBar = document.getElementById('progressBar');
+const leftLabel = document.getElementById('leftLabel');
+const leftTitle = document.getElementById('leftTitle');
+const leftScenario = document.getElementById('leftScenario');
+const leftContext = document.getElementById('leftContext');
+const rightTitle = document.getElementById('rightTitle');
+const rightText = document.getElementById('rightText');
+const rightYear = document.getElementById('rightYear');
+const rightActions = document.getElementById('rightActions');
+const redFlags = document.getElementById('redFlags');
+const yearButtons = Array.from(document.querySelectorAll('[data-year-button]'));
+const scenarioButtons = Array.from(document.querySelectorAll('[data-scenario-button]'));
+const scenarioSummary = document.getElementById('scenarioSummary');
+const scenarioTimeline = document.getElementById('scenarioTimeline');
+const scenarioDock = document.getElementById('scenarioDock');
+let activeScenario = 'factory';
+function safe(value) {
+  return String(value).replace(/[&<>"]/g, function(ch) {
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch];
+  });
+}
+function renderRailCards(rows, label, variant) {
+  return '<div class="rail-stack">' + rows.map(function(row) {
+    const title = safe(row[0]);
+    const body = safe(row[1]);
+    const note = safe(row[2]);
+    if (variant === 'action') {
+      return '<div class="rail-card action-card"><div class="rail-code">' + title + '</div><div><p><strong>' + body + '</strong></p><em>' + note + '</em></div></div>';
+    }
+    const cardClass = variant === 'scenario' ? 'rail-card scenario-card' : 'rail-card context-card';
+    return '<div class="' + cardClass + '"><div class="rail-card-head"><span>' + title + '</span><b>' + safe(label) + '</b></div><p>' + body + '</p><em>' + note + '</em></div>';
+  }).join('') + '</div>';
+}
+function enhanceTablesForSmallScreens() {
+  document.querySelectorAll('.table-frame table').forEach(function(table) {
+    const headers = Array.from(table.querySelectorAll('thead th')).map(function(th) {
+      return th.textContent.trim();
+    });
+    table.querySelectorAll('tbody tr').forEach(function(row) {
+      Array.from(row.children).forEach(function(cell, index) {
+        cell.setAttribute('data-label', headers[index] || '');
+      });
+    });
+  });
+}
+function renderScenarioExplorer() {
+  if (!scenarioSummary || !scenarioTimeline || !scenarioDock) return;
+  const data = scenarioExplorerData[activeScenario] || scenarioExplorerData.factory;
+  scenarioButtons.forEach(function(btn) {
+    const selected = btn.dataset.scenarioButton === activeScenario;
+    btn.classList.toggle('active', selected);
+    btn.setAttribute('aria-selected', selected ? 'true' : 'false');
+  });
+  scenarioSummary.innerHTML =
+    '<div class="scenario-summary-grid">' +
+      '<div class="scenario-score"><div><b>' + safe(data.code) + '</b><span>' + safe(data.axis) + ' · ' + safe(data.weight) + '</span></div><span>Escenario seleccionado</span></div>' +
+      '<div class="scenario-copy"><h4>' + safe(data.title) + '</h4><p><strong>Tesis.</strong> ' + safe(data.thesis) + '</p><p>' + safe(data.body) + '</p>' +
+        '<div class="scenario-detail-grid">' + data.details.map(function(item) {
+          return '<div class="scenario-detail"><b>' + safe(item[0]) + '</b><span>' + safe(item[1]) + '</span></div>';
+        }).join('') + '</div>' +
+      '</div>' +
+    '</div>';
+  scenarioTimeline.innerHTML = data.timeline.map(function(item) {
+    return '<div class="scenario-year"><b>' + safe(item[0]) + '</b><span>' + safe(item[1]) + '</span></div>';
+  }).join('');
+  scenarioDock.textContent = data.title + ' · ' + data.weight;
+}
+function setYear(year, manual) {
+  activeYear = year;
+  if (manual) manualYearUntil = Date.now() + 5000;
+  yearButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.yearButton === activeYear));
+}
+function renderPanels() {
+  const data = panelData[activeState] || panelData.resumen;
+  leftLabel.textContent = data.label + ' · ' + activeYear;
+  leftTitle.textContent = data.leftTitle;
+  leftScenario.innerHTML = renderRailCards(scenarioByYear[activeYear] || scenarioByYear['2026'], activeYear, 'scenario');
+  leftContext.innerHTML = renderRailCards(data.leftRows, data.label, 'context');
+  rightTitle.textContent = data.rightTitle;
+  rightText.textContent = data.label + ': decisiones, red flags e indicadores que cambian con el scroll y el año activo.';
+  rightYear.innerHTML = renderRailCards(yearFocus[activeYear] || yearFocus['2026'], activeYear, 'context');
+  rightActions.innerHTML = renderRailCards(data.rightRows, data.label, 'action');
+  redFlags.innerHTML = data.redFlags.map(flag => '<div>' + safe(flag) + '</div>').join('');
+}
+function updateFromScroll() {
+  const probe = window.innerHeight * 0.38;
+  let active = sections[0];
+  for (const section of sections) {
+    if (section.getBoundingClientRect().top <= probe) active = section;
+  }
+  activeState = active.dataset.state || 'resumen';
+  if (Date.now() > manualYearUntil && active.dataset.year) setYear(active.dataset.year, false);
+  navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + active.id));
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+  progressBar.style.height = Math.max(0, Math.min(100, pct)) + '%';
+  renderPanels();
+}
+let ticking = false;
+window.addEventListener('scroll', function() {
+  if (ticking) return;
+  window.requestAnimationFrame(function() { updateFromScroll(); ticking = false; });
+  ticking = true;
+}, { passive: true });
+yearButtons.forEach(btn => btn.addEventListener('click', function() { setYear(btn.dataset.yearButton, true); renderPanels(); }));
+scenarioButtons.forEach(btn => btn.addEventListener('click', function() {
+  activeScenario = btn.dataset.scenarioButton || 'factory';
+  renderScenarioExplorer();
+}));
+document.getElementById('focusMode').addEventListener('click', function() {
+  const on = document.body.classList.toggle('focus');
+  this.textContent = on ? 'Vista con columnas' : 'Modo lectura';
+});
+enhanceTablesForSmallScreens();
+setYear('2026', false);
+renderScenarioExplorer();
+renderPanels();
+updateFromScroll();
+</script>
+</body>
+</html>
